@@ -16,7 +16,7 @@ class Astronauta extends Model
         'status'
     ];
 
-    public function missao() {
+    public function missoes() {
             return $this->belongsToMany(Missao::class, 'astronauta_missao');
             }
 }

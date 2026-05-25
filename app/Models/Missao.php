@@ -26,6 +26,9 @@ class Missao extends Model
     public function astronautas() {
             return $this->belongsToMany(Astronauta::class, 'astronauta_missao');
             }
+    public function corpo() {
+    return $this->belongsTo(Corpo::class, 'corpo_celeste_id');
+}
 }
 
 

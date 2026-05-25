@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Validation\Rule;
 use App\Models\Corpo;
 use Illuminate\Http\Request;
 
@@ -12,7 +12,8 @@ class CorpoController extends Controller
      */
     public function index()
     {
-        //
+        $corpos = Corpo::all();
+        return view('corpos.index', compact('corpos'));
     }
 
     /**
@@ -20,7 +21,7 @@ class CorpoController extends Controller
      */
     public function create()
     {
-        //
+        return view('corpos.create');
     }
 
     /**
@@ -28,7 +29,17 @@ class CorpoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required',
+            'tipo' => ['required', Rule::in(['planeta', 'Lua', 'asteroide', 'cometa', 'estrela', 'nebulosa'])],
+            'distancia_terra' => 'required',
+            'descricao' => 'required',
+            'diametro_km' => 'required'
+
+
+        ]);
+        Corpo::create($request->all());
+        return redirect()->route('corpos.index')->with('sucesso', 'Corpo criado');
     }
 
     /**
@@ -36,7 +47,8 @@ class CorpoController extends Controller
      */
     public function show(Corpo $corpo)
     {
-        //
+
+        return view('corpos.show', compact('corpo'));
     }
 
     /**
@@ -44,7 +56,7 @@ class CorpoController extends Controller
      */
     public function edit(Corpo $corpo)
     {
-        //
+        return view('corpos.edit', compact('corpo'));
     }
 
     /**
@@ -53,6 +65,17 @@ class CorpoController extends Controller
     public function update(Request $request, Corpo $corpo)
     {
         //
+        $request->validate([
+            'nome' => 'required',
+            'tipo' => ['required', Rule::in(['planeta', 'Lua', 'asteroide', 'cometa', 'estrela', 'nebulosa'])],
+            'distancia_terra' => 'required',
+            'descricao' => 'required',
+            'diametro_km' => 'required'
+
+
+        ]);
+        $corpo->update($request->all());
+        return redirect()->route('corpos.index')->with('sucesso', 'Corpo atualizado');
     }
 
     /**
@@ -60,6 +83,7 @@ class CorpoController extends Controller
      */
     public function destroy(Corpo $corpo)
     {
-        //
+        $corpo->delete();
+        return redirect()->route('corpos.index')->with('sucesso', 'Corpo apagado');
     }
 }

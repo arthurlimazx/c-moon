@@ -11,13 +11,13 @@ class Corpo extends Model
         'nome',
         'tipo',
         'distancia_terra',
-        'descricao'
+        'descricao',
+        'diametro_km'
         
 
     ];
 
-    public function corpo()
-    {
-        return $this->belongsTo(Corpo::class, 'corpo_celeste_id');
-    }
+    public function missoes() {
+    return $this->hasMany(Missao::class, 'corpo_celeste_id');
+}
 }

@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Missao;
 use App\Models\Astronauta;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AstronautaController extends Controller
 {
@@ -12,8 +13,8 @@ class AstronautaController extends Controller
      */
     public function index()
     {
-        $Astronautas = Astronauta::all();
-        return view('astronautas.index', compact('Astronautas')); 
+        $astronautas = Astronauta::all();
+        return view('astronautas.index', compact('astronautas')); 
     }
 
     /**
@@ -21,7 +22,8 @@ class AstronautaController extends Controller
      */
     public function create()
     {
-       
+       $missoes = Missao::all();
+       return view('astronautas.create', compact('missoes'));
     }
 
     /**
@@ -29,15 +31,27 @@ class AstronautaController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'nome' => 'required',
+            'nacionalidade' => 'required',
+            'especialidade' => 'required',
+            'num_missoes' => 'required|integer',
+            'status' => ['required', Rule::in(['ativo', 'inativo', 'aposentado'])],
+        ]);
+
+        $astronauta = Astronauta::create($request->all());
+        if ($request->has('missoes')) {
+            $astronauta->missoes()->attach($request->input('missoes'));
+        }
+        return redirect()->route('astronautas.index')->with('sucesso', 'Astronauta criados');
     }
 
     /**
      * Display the specified resource.
      */
     public function show(Astronauta $astronauta)
-    {
-        //
+    {   
+        return view('astronautas.show', compact('astronauta'));
     }
 
     /**
@@ -45,7 +59,9 @@ class AstronautaController extends Controller
      */
     public function edit(Astronauta $astronauta)
     {
-        //
+      
+        $missoes = Missao::all();
+        return view('astronautas.edit', compact('astronauta', 'missoes'));
     }
 
     /**
@@ -53,14 +69,34 @@ class AstronautaController extends Controller
      */
     public function update(Request $request, Astronauta $astronauta)
     {
-        //
+        $request->validate([
+            'nome' => 'required',
+            'nacionalidade' => 'required',
+            'especialidade' => 'required',
+            'num_missoes' => 'required|integer',
+            'status' => ['required', Rule::in(['ativo', 'inativo', 'aposentado'])]
+        ]);
+
+        $astronauta->update($request->all());
+        if ($request->has('missoes')) {
+           $astronauta->missoes()->sync($request->input('missoes'));
+
+        } else {
+            $astronauta->missoes()->detach();
+
+        }
+        return redirect()->route('astronautas.index')->with('sucesso', 'Astronauta atualizado');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Astronauta $astronauta)
     {
-        //
+        
+        $astronauta->missoes()->detach();
+        $astronauta->delete();
+        return redirect()->route('astronautas.index')->with('sucesso', 'Astronauta deletado');
     }
 }
