@@ -5,6 +5,7 @@ use App\Models\Missao;
 use App\Models\Astronauta;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class AstronautaController extends Controller
 {
@@ -37,12 +38,21 @@ class AstronautaController extends Controller
             'especialidade' => 'required',
             'num_missoes' => 'required|integer',
             'status' => ['required', Rule::in(['ativo', 'inativo', 'aposentado'])],
+            'fotos' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $astronauta = Astronauta::create($request->all());
+
+        $dados = $request->all();
+                if ($request->hasFile('fotos') && $request->file('fotos')->isValid()) {
+                $fotos= $request->file('fotos')->store('fotos', 'public');
+                $dados['fotos'] = $fotos;
+                }
+
+        $astronauta = Astronauta::create($dados);
         if ($request->has('missoes')) {
             $astronauta->missoes()->attach($request->input('missoes'));
         }
+            
         return redirect()->route('astronautas.index')->with('sucesso', 'Astronauta criados');
     }
 
@@ -74,10 +84,20 @@ class AstronautaController extends Controller
             'nacionalidade' => 'required',
             'especialidade' => 'required',
             'num_missoes' => 'required|integer',
-            'status' => ['required', Rule::in(['ativo', 'inativo', 'aposentado'])]
+            'status' => ['required', Rule::in(['ativo', 'inativo', 'aposentado'])],
+            'fotos' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $astronauta->update($request->all());
+
+         $dados = $request->all();
+            if ($request->hasFile('fotos') && $request->file('fotos')->isValid()) {
+                if ($astronauta->fotos) {
+                    Storage::disk('public')->delete($astronauta->fotos);
+                }
+                $fotos= $request->file('fotos')->store('fotos', 'public');
+                $dados['fotos'] = $fotos;
+            }
+            $astronauta->update($dados);
         if ($request->has('missoes')) {
            $astronauta->missoes()->sync($request->input('missoes'));
 
@@ -95,6 +115,9 @@ class AstronautaController extends Controller
     public function destroy(Astronauta $astronauta)
     {
         
+        if ($astronauta->fotos) {
+            Storage::disk('public')->delete($astronauta->fotos);
+        }
         $astronauta->missoes()->detach();
         $astronauta->delete();
         return redirect()->route('astronautas.index')->with('sucesso', 'Astronauta deletado');

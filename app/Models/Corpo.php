@@ -12,9 +12,8 @@ class Corpo extends Model
         'tipo',
         'distancia_terra',
         'descricao',
-        'diametro_km'
-        
-
+        'diametro_km',
+        'fotos'
     ];
 
     public function missoes() {

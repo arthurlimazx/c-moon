@@ -13,7 +13,8 @@ class Astronauta extends Model
         'nacionalidade',
         'especialidade',
         'num_missoes',
-        'status'
+        'status',
+        'fotos'
     ];
 
     public function missoes() {

@@ -17,8 +17,8 @@ class Missao extends Model
         'data_retorno',
         'status',
         'descricao',
-        'corpo_celeste_id'
-
+        'corpo_celeste_id',
+        'fotos'
     ];
 
     
