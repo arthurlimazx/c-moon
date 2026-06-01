@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Validation\Rule;
 use App\Models\Corpo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class CorpoController extends Controller
 {
@@ -34,12 +36,22 @@ class CorpoController extends Controller
             'tipo' => ['required', Rule::in(['planeta', 'Lua', 'asteroide', 'cometa', 'estrela', 'nebulosa'])],
             'distancia_terra' => 'required',
             'descricao' => 'required',
-            'diametro_km' => 'required'
+            'diametro_km' => 'required',
+            'fotos' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
 
 
         ]);
-        Corpo::create($request->all());
+         
+        $dados = $request->all();
+            if ($request->hasFile('fotos') && $request->file('fotos')->isValid()) {
+            $fotos= $request->file('fotos')->store('fotos', 'public');
+            $dados['fotos'] = $fotos;
+            }
+        
+        Corpo::create($dados);
+        
         return redirect()->route('corpos.index')->with('sucesso', 'Corpo criado');
+
     }
 
     /**
@@ -70,11 +82,23 @@ class CorpoController extends Controller
             'tipo' => ['required', Rule::in(['planeta', 'Lua', 'asteroide', 'cometa', 'estrela', 'nebulosa'])],
             'distancia_terra' => 'required',
             'descricao' => 'required',
-            'diametro_km' => 'required'
+            'diametro_km' => 'required',
+            'fotos' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+
+            
 
 
-        ]);
-        $corpo->update($request->all());
+            ]);
+            
+            $dados = $request->all();
+            if ($request->hasFile('fotos') && $request->file('fotos')->isValid()) {
+                if ($corpo->fotos) {
+                    Storage::disk('public')->delete($corpo->fotos);
+                }
+                $fotos= $request->file('fotos')->store('fotos', 'public');
+                $dados['fotos'] = $fotos;
+            }
+        $corpo->update($dados);
         return redirect()->route('corpos.index')->with('sucesso', 'Corpo atualizado');
     }
 
@@ -83,6 +107,11 @@ class CorpoController extends Controller
      */
     public function destroy(Corpo $corpo)
     {
+        
+         if ($corpo->fotos) {
+            Storage::disk('public')->delete($corpo->fotos);
+        }
+        
         $corpo->delete();
         return redirect()->route('corpos.index')->with('sucesso', 'Corpo apagado');
     }
