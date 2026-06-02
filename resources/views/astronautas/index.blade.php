@@ -58,6 +58,7 @@
             <td>
               <div class="td-actions">
                 <a href="{{ route('astronautas.show', $a) }}" class="btn btn-ghost btn-sm">Ver</a>
+                @if (Auth::user()->isAdmin())
                 <a href="{{ route('astronautas.edit', $a) }}" class="btn btn-secondary btn-sm">Editar</a>
                 <form method="POST" action="{{ route('astronautas.destroy', $a) }}" style="display:inline;">
                   @csrf @method('DELETE')
@@ -66,6 +67,7 @@
                     Excluir
                   </button>
                 </form>
+                @endif
               </div>
             </td>
           </tr>

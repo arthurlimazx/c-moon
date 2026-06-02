@@ -60,6 +60,7 @@
             <td>
               <div class="td-actions">
                 <a href="{{ route('missoes.show', $m->id) }}" class="btn btn-ghost btn-sm">Ver</a>
+                @if (Auth::user()->isAdmin())
                 <a href="{{ route('missoes.edit', $m->id) }}" class="btn btn-secondary btn-sm">Editar</a>
                 <form method="POST" action="{{ route('missoes.destroy', $m->id) }}" style="display:inline;">
                   @csrf @method('DELETE')
@@ -68,6 +69,7 @@
                     Excluir
                   </button>
                 </form>
+                @endif
               </div>
             </td>
           </tr>

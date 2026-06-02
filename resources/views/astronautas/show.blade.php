@@ -23,12 +23,14 @@
     </div>
 
     <div class="show-hero-right">
-
+     
       <div class="hero-actions">
         <a href="{{ route('astronautas.index') }}" class="btn btn-hero">← Voltar</a>
+        @if (Auth::user()->isAdmin())
         <a href="{{ route('astronautas.edit', $astronauta) }}" class="btn btn-hero">Editar</a>
-      </div>
-
+         @endif
+        </div>
+       
       <div class="section-label" style="margin-bottom: 16px;">Informações pessoais</div>
       <div class="form-grid" style="margin-bottom: 28px;">
         <div class="detail-field">
@@ -84,12 +86,14 @@
         </table>
       </div>
       @endif
-
-      <div style=" padding-top:24px; border-top:1px solid var(--border);">
+  
+      <div style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+        @if (Auth::user()->isAdmin())
         <form method="POST" action="{{ route('astronautas.destroy', $astronauta) }}">
           @csrf @method('DELETE')
           <button type="submit" class="btn btn-danger" data-confirm="Excluir {{ $astronauta->nome }}? Esta ação não pode ser desfeita.">Excluir astronauta</button>
         </form>
+        @endif
       </div>
 
     </div>

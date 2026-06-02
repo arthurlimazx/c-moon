@@ -24,10 +24,14 @@
  
     <div class="show-hero-right">
  
+      
       <div class="hero-actions">
         <a href="{{ route('corpos.index') }}" class="btn btn-hero">← Voltar</a>
+        @if (Auth::user()->isAdmin())
         <a href="{{ route('corpos.edit', $corpo) }}" class="btn btn-hero">Editar</a>
+         @endif
       </div>
+     
  
       <div class="section-label" style="margin-bottom: 16px;">Dados técnicos</div>
       <div class="form-grid" style="margin-bottom: 28px;">
@@ -86,12 +90,14 @@
         </table>
       </div>
       @endif
- 
+    
       <div style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
+        @if (Auth::user()->isAdmin())
         <form method="POST" action="{{ route('corpos.destroy', $corpo) }}">
           @csrf @method('DELETE')
           <button type="submit" class="btn btn-danger" data-confirm="Excluir {{ $corpo->nome }}?">Excluir corpo celeste</button>
         </form>
+        @endif
       </div>
  
     </div>

@@ -3,7 +3,7 @@
 </div>
 
 <nav class="navbar">
-  <a href="{{ route('dashboard') }}" class="navbar-brand">
+  <a href="{{ route('welcome') }}" class="navbar-brand">
     <span class="dot"></span>
     C-Moon
   </a>
@@ -41,7 +41,7 @@
             Meu perfil
           </a>
 
-          <a href="{{ route('dashboard') }}" class="navbar-dropdown-item">
+          <a href="{{ route('welcome') }}" class="navbar-dropdown-item">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
               <rect x="1" y="3" width="14" height="10" rx="1.5"/>
               <path d="M5 7h6M5 10h4" stroke-linecap="round"/>

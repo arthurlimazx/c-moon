@@ -20,7 +20,7 @@
     <div class="auth-panel-dot"></div>
  
     <div class="auth-panel-content">
-      <a href="{{ route('dashboard') }}" class="auth-panel-logo">
+      <a href="{{ route('welcome') }}" class="auth-panel-logo">
         <span class="dot"></span>
         C-Moon
       </a>

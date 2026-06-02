@@ -25,12 +25,14 @@
     </div>
 
     <div class="show-hero-right">
-
+      
       <div class="hero-actions">
         <a href="{{ route('missoes.index') }}" class="btn btn-hero">← Voltar</a>
+        @if (Auth::user()->isAdmin())
         <a href="{{ route('missoes.edit', $missao) }}" class="btn btn-hero">Editar</a>
+         @endif
       </div>
-
+     
       <div class="section-label" style="margin-bottom: 16px;">Dados da missão</div>
       <div class="form-grid" style="margin-bottom: 28px;">
         <div class="detail-field">
@@ -99,7 +101,9 @@
       <div style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border);">
         <form method="POST" action="{{ route('missoes.destroy', $missao) }}">
           @csrf @method('DELETE')
-          <button type="submit" class="btn btn-danger" data-confirm="Excluir a missão {{ $missao->nome }}?">Excluir missão</button>
+          @if (Auth::user()->isAdmin())
+            <button type="submit" class="btn btn-danger" data-confirm="Excluir a missão {{ $missao->nome }}?">Excluir missão</button>
+          @endif
         </form>
       </div>
 

@@ -286,7 +286,7 @@ a { color: inherit; text-decoration: none; }
 /* ── TABLES ──────────────────────────────────────────────────── */
 .table-wrap { overflow-x: auto; }
 
-table { width: 100%; border-collapse: collapse; }
+table { width: 100%; border-collapse: collapse; background-color: var(--bg-2); }
 
 thead tr { border-bottom: 1px solid var(--border); }
 
