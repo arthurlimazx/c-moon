@@ -242,7 +242,7 @@
 
 <div class="starfield"><canvas id="stars"></canvas></div>
 
-<a href="{{ route('dashboard') }}" class="error-logo">
+<a href="{{ url('/') }}" class="error-logo">
   <span class="dot"></span>
   C-Moon
 </a>
@@ -274,12 +274,12 @@
     </p>
 
     <div class="error-actions">
-      <a href="{{ route('dashboard') }}" class="btn btn-primary">
+      <a href="{{ url('/') }}" class="btn btn-primary">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
           <polyline points="9 22 9 12 15 12 15 22"/>
         </svg>
-        Voltar para o painel
+        Voltar para a página inicial
       </a>
       <a href="javascript:history.back()" class="btn btn-ghost">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

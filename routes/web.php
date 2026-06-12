@@ -16,6 +16,12 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->middleware(['auth', 'verified'])->name('welcome');
 
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('astronautas', AstronautaController::class)->except(['index', 'show']);
+    Route::resource('corpos', CorpoController::class)->except(['index', 'show']);
+    Route::resource('missoes', MissaoController::class)->except(['index', 'show'])->parameters(['missoes' => 'missao']);
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -28,17 +34,10 @@ Route::middleware('auth')->group(function () {
         return redirect('login');
     })->name('logout');
 
-    // ── Todos autenticados: só leitura ──
+
     Route::resource('astronautas', AstronautaController::class)->only(['index', 'show']);
     Route::resource('corpos', CorpoController::class)->only(['index', 'show']);
     Route::resource('missoes', MissaoController::class)->only(['index', 'show'])->parameters(['missoes' => 'missao']);
-});
-
-// ── Só admin: criar, editar, deletar ──
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::resource('astronautas', AstronautaController::class)->except(['index', 'show']);
-    Route::resource('corpos', CorpoController::class)->except(['index', 'show']);
-    Route::resource('missoes', MissaoController::class)->except(['index', 'show'])->parameters(['missoes' => 'missao']);
 });
 
 require __DIR__.'/auth.php';
