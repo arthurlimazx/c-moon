@@ -16,14 +16,14 @@
   @endif
 </div>
 
-
 @if($missoes->isEmpty())
   <div class="empty-state">
     <div class="icon">🚀</div>
     <h3>Nenhuma missão cadastrada</h3>
     <p>Planeje a primeira missão de exploração.</p>
   </div>
-@else
+
+@elseif(Auth::user()->isAdmin())
   <div class="card">
     <div class="table-wrap">
       <table>
@@ -63,7 +63,6 @@
             <td>
               <div class="td-actions">
                 <a href="{{ route('missoes.show', $m->id) }}" class="btn btn-ghost btn-sm">Ver</a>
-                @if (Auth::user()->isAdmin())
                 <a href="{{ route('missoes.edit', $m->id) }}" class="btn btn-secondary btn-sm">Editar</a>
                 <form method="POST" action="{{ route('missoes.destroy', $m->id) }}" style="display:inline;">
                   @csrf @method('DELETE')
@@ -72,7 +71,6 @@
                     Excluir
                   </button>
                 </form>
-                @endif
               </div>
             </td>
           </tr>
@@ -81,5 +79,26 @@
       </table>
     </div>
   </div>
+
+@else
+  <div class="cards-grid">
+    @foreach($missoes as $m)
+    <div class="card card-astronauta" >
+      @if($m->fotos)
+        <img src="{{ asset('storage/' . $m->fotos) }}" alt="{{ $m->nome }}">
+      @else
+        <div class="card-astronauta-avatar">🚀</div>
+      @endif
+      <div class="card-body">
+        <h3>{{ $m->nome }}</h3>
+        
+        
+        <p class="td-muted">{{ \Carbon\Carbon::parse($m->data_lancamento)->format('d/m/Y') }} → {{ \Carbon\Carbon::parse($m->data_retorno)->format('d/m/Y') }}</p>
+        <a href="{{ route('missoes.show', $m->id) }}" class="btn btn-ghost btn-sm" style="margin-top:4px;">Ver</a>
+      </div>
+    </div>
+    @endforeach
+  </div>
 @endif
+
 @endsection

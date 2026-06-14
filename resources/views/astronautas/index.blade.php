@@ -22,7 +22,8 @@
     <h3>Nenhum astronauta cadastrado</h3>
     <p>Comece registrando o primeiro membro da equipe.</p>
   </div>
-@else
+
+@elseif(Auth::user()->isAdmin())
   <div class="card">
     <div class="table-wrap">
       <table>
@@ -40,7 +41,7 @@
           @foreach($astronautas as $a)
           <tr>
             <td>
-              <a href="{{ route('astronautas.show', $a) }}" style="font-weight:500; transition:color .15s;" 
+              <a href="{{ route('astronautas.show', $a) }}" style="font-weight:500; transition:color .15s;"
                  onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='inherit'">
                 {{ $a->nome }}
               </a>
@@ -60,7 +61,6 @@
             <td>
               <div class="td-actions">
                 <a href="{{ route('astronautas.show', $a) }}" class="btn btn-ghost btn-sm">Ver</a>
-                @if (Auth::user()->isAdmin())
                 <a href="{{ route('astronautas.edit', $a) }}" class="btn btn-secondary btn-sm">Editar</a>
                 <form method="POST" action="{{ route('astronautas.destroy', $a) }}" style="display:inline;">
                   @csrf @method('DELETE')
@@ -69,7 +69,6 @@
                     Excluir
                   </button>
                 </form>
-                @endif
               </div>
             </td>
           </tr>
@@ -78,5 +77,23 @@
       </table>
     </div>
   </div>
+
+@else
+  <div class="cards-grid">
+    @foreach($astronautas as $a)
+    <div class="card card-astronauta">
+      @if($a->fotos)
+        <img src="{{ asset('storage/' . $a->fotos) }}" alt="{{ $a->nome }}">
+      @endif
+      <div class="card-body">
+        <h3>{{ $a->nome }}</h3>
+        <p class="td-muted">{{ $a->especialidade }}</p>
+       
+        <a href="{{ route('astronautas.show', $a) }}" class="btn btn-ghost btn-sm" style="margin-top:12px;">Ver</a>
+      </div>
+    </div>
+    @endforeach
+  </div>
 @endif
+
 @endsection

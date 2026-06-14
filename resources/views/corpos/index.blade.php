@@ -9,7 +9,6 @@
     <h1>Corpos Celestes</h1>
     <p>{{ $corpos->count() }} {{ $corpos->count() === 1 ? 'corpo cadastrado' : 'corpos cadastrados' }}</p>
   </div>
-
   @if (Auth::user()->isAdmin())
   <a href="{{ route('corpos.create') }}" class="btn btn-primary">
     + Novo corpo celeste
@@ -23,7 +22,8 @@
     <h3>Nenhum corpo celeste cadastrado</h3>
     <p>Adicione planetas, luas, asteroides e outros objetos ao mapa.</p>
   </div>
-@else
+
+@elseif(Auth::user()->isAdmin())
   <div class="card">
     <div class="table-wrap">
       <table>
@@ -49,13 +49,13 @@
             <td>
               @php
                 $tipoBadge = [
-                  'planeta'  => 'badge-blue',
-                  'Lua'      => 'badge-gray',
-                  'asteroide'=> 'badge-amber',
-                  'cometa'   => 'badge-blue',
-                  'estrela'  => 'badge-amber',
-                  'nebulosa' => 'badge-green',
-                ][$c->tipo] ?? 'badge-gray';
+                  'planeta'   => 'badge-blue',
+                  'lua'       => 'badge-gray',
+                  'asteroide' => 'badge-amber',
+                  'cometa'    => 'badge-blue',
+                  'estrela'   => 'badge-amber',
+                  'nebulosa'  => 'badge-green',
+                ][strtolower($c->tipo)] ?? 'badge-gray';
               @endphp
               <span class="badge {{ $tipoBadge }}">{{ ucfirst($c->tipo) }}</span>
             </td>
@@ -65,7 +65,6 @@
             <td>
               <div class="td-actions">
                 <a href="{{ route('corpos.show', $c) }}" class="btn btn-ghost btn-sm">Ver</a>
-                @if (Auth::user()->isAdmin())
                 <a href="{{ route('corpos.edit', $c) }}" class="btn btn-secondary btn-sm">Editar</a>
                 <form method="POST" action="{{ route('corpos.destroy', $c) }}" style="display:inline;">
                   @csrf @method('DELETE')
@@ -74,7 +73,6 @@
                     Excluir
                   </button>
                 </form>
-                @endif
               </div>
             </td>
           </tr>
@@ -83,5 +81,26 @@
       </table>
     </div>
   </div>
+
+@else
+  <div class="cards-grid">
+    @foreach($corpos as $c)
+    <div class="card card-astronauta">
+      @if($c->fotos)
+        <img src="{{ asset('storage/' . $c->fotos) }}" alt="{{ $c->nome }}">
+      @else
+        <div class="card-astronauta-avatar">🪐</div>
+      @endif
+      <div class="card-body">
+        <h3>{{ $c->nome }}</h3>
+       
+       
+        <p class="td-muted">{{ $c->distancia_terra }} km</p>
+        <a href="{{ route('corpos.show', $c) }}" class="btn btn-ghost btn-sm" style="margin-top:4px;">Ver</a>
+      </div>
+    </div>
+    @endforeach
+  </div>
 @endif
+
 @endsection
