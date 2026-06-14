@@ -9,9 +9,12 @@
     <h1>Corpos Celestes</h1>
     <p>{{ $corpos->count() }} {{ $corpos->count() === 1 ? 'corpo cadastrado' : 'corpos cadastrados' }}</p>
   </div>
+
+  @if (Auth::user()->isAdmin())
   <a href="{{ route('corpos.create') }}" class="btn btn-primary">
     + Novo corpo celeste
   </a>
+  @endif
 </div>
 
 @if($corpos->isEmpty())

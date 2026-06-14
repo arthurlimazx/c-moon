@@ -9,10 +9,13 @@
     <h1>Missões</h1>
     <p>{{ $missoes->count() }} {{ $missoes->count() === 1 ? 'missão registrada' : 'missões registradas' }}</p>
   </div>
+  @if (Auth::user()->isAdmin())
   <a href="{{ route('missoes.create') }}" class="btn btn-primary">
     + Nova missão
   </a>
+  @endif
 </div>
+
 
 @if($missoes->isEmpty())
   <div class="empty-state">

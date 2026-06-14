@@ -24,7 +24,7 @@
 
       @if(session('success'))
         <div class="alert alert-success" data-auto-dismiss style="margin-top: 24px;">
-          ✓ {{ session('success') }}
+          ✓ {{ session('sucesso') }}
         </div>
       @endif
 

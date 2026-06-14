@@ -85,14 +85,22 @@ class CorpoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Corpo $corpo)
-    {
-        
-         if ($corpo->fotos) {
-            Storage::disk('public')->delete($corpo->fotos);
+   public function destroy(Corpo $corpo)
+{
+    
+    foreach ($corpo->missoes as $missao) {
+        if ($missao->fotos) {
+            Storage::disk('public')->delete($missao->fotos);
         }
-        
-        $corpo->delete();
-        return redirect()->route('corpos.index')->with('sucesso', 'Corpo apagado');
+        $missao->astronautas()->detach();
+        $missao->delete();
     }
+
+    if ($corpo->fotos) {
+        Storage::disk('public')->delete($corpo->fotos);
+    }
+
+    $corpo->delete();
+    return redirect()->route('corpos.index')->with('sucesso', 'Corpo apagado');
+}
 }

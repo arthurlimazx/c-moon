@@ -9,9 +9,11 @@
     <h1>Astronautas</h1>
     <p>{{ $astronautas->count() }} {{ $astronautas->count() === 1 ? 'astronauta registrado' : 'astronautas registrados' }}</p>
   </div>
+  @if (Auth::user()->isAdmin())
   <a href="{{ route('astronautas.create') }}" class="btn btn-primary">
     + Novo astronauta
   </a>
+  @endif
 </div>
 
 @if($astronautas->isEmpty())
