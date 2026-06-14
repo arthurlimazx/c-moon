@@ -15,18 +15,19 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->date('data_lancamento');
-            $table->date('data_retorno')->nullable()->constantrained('corpos_celestes')->nullOnDelete();
+            $table->date('data_retorno')->nullable();
             $table->enum('status', ['planejada', 'em andamento', 'concluida', 'cancelada'])->default('planejada');
             $table->text('descricao')->nullable();
-            $table->foreignId('corpo_celeste_id');
+            $table->foreignId('corpo_celeste_id')->constrained('corpos')->cascadeOnDelete();
+            $table->string('fotos')->nullable();
             $table->timestamps();
         });
 
         
         Schema::create('astronauta_missao', function(Blueprint $table) {
         $table->id();
-        $table->foreignId('astronauta_id')->constrained('astronautas')->cascadeOnDeLenete();
-        $table->foreignId('missao_id')->constrained('missoes')->cascadeOnDeLenete();
+        $table->foreignId('astronauta_id')->constrained('astronautas')->cascadeOnDeDelete();
+        $table->foreignId('missao_id')->constrained('missoes')->cascadeOnDeDelete();
     });
     }
 

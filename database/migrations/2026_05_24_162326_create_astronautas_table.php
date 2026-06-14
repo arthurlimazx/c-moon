@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('especialidade');
             $table->integer('num_missoes')->default(0);
             $table->enum('status', ['ativo', 'inativo', 'aposentado'])->default('ativo');
+            $table->string('fotos')->nullable();
             $table->timestamps();
         });
     }

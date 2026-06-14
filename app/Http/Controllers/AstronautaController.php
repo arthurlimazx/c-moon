@@ -6,6 +6,7 @@ use App\Models\Astronauta;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreAstronautaRequest;
 
 class AstronautaController extends Controller
 {
@@ -30,19 +31,12 @@ class AstronautaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAstronautaRequest $request)
     {
-        $request->validate([
-            'nome' => 'required',
-            'nacionalidade' => 'required',
-            'especialidade' => 'required',
-            'num_missoes' => 'required|integer',
-            'status' => ['required', Rule::in(['ativo', 'inativo', 'aposentado'])],
-            'fotos' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-        ]);
+        $dados = $request->validated();
 
 
-        $dados = $request->all();
+        
                 if ($request->hasFile('fotos') && $request->file('fotos')->isValid()) {
                 $fotos= $request->file('fotos')->store('fotos', 'public');
                 $dados['fotos'] = $fotos;
@@ -77,19 +71,12 @@ class AstronautaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Astronauta $astronauta)
+    public function update(StoreAstronautaRequest $request, Astronauta $astronauta)
     {
-        $request->validate([
-            'nome' => 'required',
-            'nacionalidade' => 'required',
-            'especialidade' => 'required',
-            'num_missoes' => 'required|integer',
-            'status' => ['required', Rule::in(['ativo', 'inativo', 'aposentado'])],
-            'fotos' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-        ]);
+        $dados = $request->validated();
 
 
-         $dados = $request->all();
+         
             if ($request->hasFile('fotos') && $request->file('fotos')->isValid()) {
                 if ($astronauta->fotos) {
                     Storage::disk('public')->delete($astronauta->fotos);

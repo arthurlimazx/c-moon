@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('distancia_terra');
             $table->float('diametro_km')->nullable();
             $table->text('descricao')->nullable();
+            $table->string('fotos')->nullable();
             $table->timestamps();
         });
     }

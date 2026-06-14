@@ -7,6 +7,7 @@ use App\Models\Astronauta;
 use App\Models\Missao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreMissaoRequest;   
 
 class MissaoController extends Controller
 {
@@ -33,26 +34,10 @@ class MissaoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMissaoRequest $request)
     {
-        $request->validate([
-            'nome' => 'required',
-            'corpo_celeste_id' => 'required|exists:corpos,id',
-            'data_lancamento' => 'required|date',
-            'status' => ['required', Rule::in(['planejada', 'em andamento', 'concluída'])],
-            'astronautas' => 'required|array',
-            'data_retorno' => 'required|date|after_or_equal:data_lancamento',
-            'descricao' => 'nullable|string',
-            'astronautas.*' => 'exists:astronautas,id',
-            'fotos' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        $dados = $request->validated();
 
-
-
-
-        ]);
-
-
-         $dados = $request->all();
             if ($request->hasFile('fotos') && $request->file('fotos')->isValid()) {
             $fotos= $request->file('fotos')->store('fotos', 'public');
             $dados['fotos'] = $fotos;
@@ -93,24 +78,9 @@ class MissaoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Missao $missao)
+    public function update(StoreMissaoRequest $request, Missao $missao)
     {
-        $request->validate([
-            'nome' => 'required',
-            'corpo_celeste_id' => 'required|exists:corpos,id',
-            'data_lancamento' => 'required|date',
-            'status' => ['required', Rule::in(['planejada', 'em andamento', 'concluída'])],
-            'astronautas' => 'required|array',
-            'data_retorno' => 'required|date|after_or_equal:data_lancamento',
-            'descricao' => 'nullable|string',
-            'astronautas.*' => 'exists:astronautas,id',
-            'fotos' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-
-
-
-
-        ]);
-        $dados = $request->all();
+        $dados = $request->validated();
             if ($request->hasFile('fotos') && $request->file('fotos')->isValid()) {
                 if ($missao->fotos) {
                     Storage::disk('public')->delete($missao->fotos);
