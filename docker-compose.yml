@@ -1,0 +1,118 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cmoon_app
+    restart: unless-stopped
+    working_dir: /var/www/html
+
+    volumes:
+      - ./:/var/www/html
+      - vendor_data:/var/www/html/vendor
+      - build_data:/var/www/html/public/build
+
+    env_file:
+      - .env
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    networks:
+      - cmoon
+
+  webserver:
+    image: nginx:stable-alpine
+    container_name: cmoon_nginx
+    restart: unless-stopped
+
+    ports:
+      - "${APP_PORT:-8000}:80"
+
+    volumes:
+      - ./:/var/www/html
+      - build_data:/var/www/html/public/build
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+
+    depends_on:
+      - app
+
+    networks:
+      - cmoon
+
+  db:
+    image: mysql:8.0
+    container_name: cmoon_db
+    restart: unless-stopped
+
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-cmoon}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+
+    ports:
+      - "${FORWARD_DB_PORT:-3306}:3306"
+
+    volumes:
+      - db_data:/var/lib/mysql
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+    networks:
+      - cmoon
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cmoon_queue
+    restart: unless-stopped
+    working_dir: /var/www/html
+
+    volumes:
+      - ./:/var/www/html
+      - vendor_data:/var/www/html/vendor
+
+    env_file:
+      - .env
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    command: php artisan queue:work --tries=3 --sleep=3
+
+    networks:
+      - cmoon
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: cmoon_phpmyadmin
+    restart: unless-stopped
+
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+
+    ports:
+      - "${FORWARD_PHPMYADMIN_PORT:-8080}:80"
+
+    depends_on:
+      - db
+
+    networks:
+      - cmoon
+
+networks:
+  cmoon:
+    driver: bridge
+
+volumes:
+  db_data:
+  vendor_data:
+  build_data:
