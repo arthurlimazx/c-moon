@@ -66,7 +66,7 @@
               <div class="td-actions">
                 <a href="{{ route('corpos.show', $c) }}" class="btn btn-ghost btn-sm">Ver</a>
                 <a href="{{ route('corpos.edit', $c) }}" class="btn btn-secondary btn-sm">Editar</a>
-                <form method="POST" action="{{ route('corpos.destroy', $c) }}" style="display:inline;">
+                <form method="POST" action="{{ route('corpos.destroy', $c) }}">
                   @csrf @method('DELETE')
                   <button type="submit" class="btn btn-danger btn-sm"
                     data-confirm="Excluir {{ $c->nome }}?">

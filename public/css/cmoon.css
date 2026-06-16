@@ -328,13 +328,7 @@ tbody td {
   letter-spacing: .04em;
 }
 
-.badge::before {
-  content: '';
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: currentColor;
-  flex-shrink: 0;
-}
+
 
 .badge-green { background: rgba(93,214,176,0.10);  color: var(--accent-3); }
 .badge-blue  { background: rgba(124,159,255,0.10); color: var(--accent-2); }
@@ -1598,4 +1592,1045 @@ select.form-control {
 
 .card-body h3{
   font-size: 24px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   C-MOON  ·  Show Page Enhancement Layer  ·  cmx-* prefix
+   Prefixo cmx- garante zero conflito com classes existentes
+═══════════════════════════════════════════════════════════════ */
+
+/* ── CMX SHOW: Layout principal ──────────────────────────────── */
+.cmx-show-wrap {
+  margin-top: 28px;
+  margin-bottom: 40px;
+}
+
+/* ── CMX HERO CARD: cartão superior com fundo noise + glow ───── */
+.cmx-hero-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.05) inset,
+    0 -1px 0 rgba(0,0,0,0.5) inset,
+    0 8px 40px rgba(0,0,0,0.6),
+    0 32px 80px rgba(0,0,0,0.4);
+  display: flex;
+  min-height: 320px;
+}
+
+/* brilho sutil no topo do card */
+.cmx-hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(200,169,110,0.3) 40%, rgba(200,169,110,0.3) 60%, transparent 100%);
+  z-index: 2;
+}
+
+/* halo de luz radial no canto superior esquerdo (apenas visual) */
+.cmx-hero-card::after {
+  content: '';
+  position: absolute;
+  top: -80px; left: -80px;
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── CMX SIDEBAR: painel esquerdo ────────────────────────────── */
+.cmx-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 48px 28px;
+  border-right: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(200,169,110,0.03) 0%, transparent 60%);
+}
+
+/* ── CMX AVATAR: foto ou ícone ───────────────────────────────── */
+.cmx-avatar-ring {
+  position: relative;
+  display: inline-flex;
+}
+
+.cmx-avatar-ring::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 180deg,
+    rgba(200,169,110,0) 0deg,
+    rgba(200,169,110,0.6) 90deg,
+    rgba(200,169,110,0.15) 180deg,
+    rgba(200,169,110,0) 360deg
+  );
+  animation: cmx-spin 8s linear infinite;
+}
+
+@keyframes cmx-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.cmx-avatar {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg-3);
+  border: 2px solid var(--bg-2);
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 2px 0 rgba(255,255,255,0.05) inset;
+}
+
+.cmx-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+
+.cmx-avatar-fallback {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 52px;
+  background: radial-gradient(circle at 40% 30%, var(--surface-2), var(--bg-3));
+}
+
+/* ── CMX SIDEBAR TEXT ────────────────────────────────────────── */
+.cmx-entity-tag {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: .18em;
+  color: var(--accent);
+  background: rgba(200,169,110,0.08);
+  border: 1px solid rgba(200,169,110,0.18);
+  padding: 3px 10px;
+  border-radius: 40px;
+}
+
+.cmx-entity-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30px;
+  line-height: 1.05;
+  color: var(--text);
+  margin: 4px 0 0;
+}
+
+.cmx-entity-sub {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 2px;
+}
+
+/* ── CMX MAIN PANEL: painel direito ──────────────────────────── */
+.cmx-main {
+  flex: 1;
+  min-width: 0;
+  padding: 40px 44px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── CMX TOP BAR: ações e badge de status ────────────────────── */
+.cmx-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cmx-topbar-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ── CMX STATUS CHIP ─────────────────────────────────────────── */
+.cmx-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 40px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .05em;
+}
+
+.cmx-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cmx-status-green  { background: rgba(93,214,176,0.08); color: var(--accent-3); border: 1px solid rgba(93,214,176,0.18); }
+.cmx-status-green::before { background: var(--accent-3); box-shadow: 0 0 6px var(--accent-3); }
+
+.cmx-status-blue   { background: rgba(124,159,255,0.08); color: var(--accent-2); border: 1px solid rgba(124,159,255,0.18); }
+.cmx-status-blue::before { background: var(--accent-2); box-shadow: 0 0 6px var(--accent-2); }
+
+.cmx-status-amber  { background: rgba(232,168,74,0.08); color: var(--warning); border: 1px solid rgba(232,168,74,0.18); }
+.cmx-status-amber::before { background: var(--warning); animation: cmx-pulse 2s ease infinite; }
+
+@keyframes cmx-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ── CMX SECTION HEADER ──────────────────────────────────────── */
+.cmx-section-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.cmx-section-head .section-label {
+  flex: 1;
+}
+
+.cmx-count-pill {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-active);
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+
+/* ── CMX STATS ROW: métricas em destaque ─────────────────────── */
+.cmx-stats-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.cmx-stat-block {
+  flex: 1;
+  min-width: 100px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+
+.cmx-stat-block:hover {
+  border-color: var(--border-active);
+}
+
+.cmx-stat-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0.4;
+}
+
+.cmx-stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.cmx-stat-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: .02em;
+}
+
+.cmx-stat-unit {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-left: 2px;
+}
+
+/* ── CMX DETAIL GRID: campos em grade ────────────────────────── */
+.cmx-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.cmx-detail-cell {
+  background: var(--bg-3);
+  padding: 16px 20px;
+  transition: background .15s;
+}
+
+.cmx-detail-cell:hover {
+  background: var(--surface);
+}
+
+.cmx-detail-cell-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 5px;
+}
+
+.cmx-detail-cell-value {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.cmx-detail-cell-full {
+  grid-column: 1 / -1;
+}
+
+/* ── CMX DIVIDER ─────────────────────────────────────────────── */
+.cmx-sep {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(200,169,110,0.15) 0%, var(--border) 50%, transparent 100%);
+  margin: 28px 0;
+}
+
+/* ── CMX DESCRIPTION BOX ─────────────────────────────────────── */
+.cmx-desc-box {
+  background: linear-gradient(135deg, rgba(200,169,110,0.04) 0%, transparent 60%);
+  border: 1px solid rgba(200,169,110,0.1);
+  border-left: 3px solid rgba(200,169,110,0.4);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 18px 22px;
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: rgba(236,238,246,0.7);
+  margin-bottom: 28px;
+}
+
+/* ── CMX TABLE: tabela de relações ───────────────────────────── */
+.cmx-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-3);
+}
+
+.cmx-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cmx-table thead tr {
+  border-bottom: 1px solid var(--border-active);
+}
+
+.cmx-table thead th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.cmx-table tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background .12s;
+}
+
+.cmx-table tbody tr:last-child { border-bottom: none; }
+
+.cmx-table tbody tr:hover {
+  background: rgba(255,255,255,0.025);
+}
+
+.cmx-table td {
+  padding: 13px 16px;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.cmx-table td a {
+  font-weight: 500;
+  transition: color .15s;
+}
+
+.cmx-table td a:hover { color: var(--accent); }
+
+.cmx-td-muted {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ── CMX CREW LIST: list de astronautas ──────────────────────── */
+.cmx-crew-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.cmx-crew-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .2s, background .2s, transform .2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.cmx-crew-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,169,110,0.3), transparent);
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.cmx-crew-card:hover {
+  border-color: rgba(200,169,110,0.25);
+  background: var(--surface);
+  transform: translateY(-2px);
+}
+
+.cmx-crew-card:hover::after {
+  opacity: 1;
+}
+
+.cmx-crew-photo {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--border-active);
+  flex-shrink: 0;
+}
+
+.cmx-crew-initials {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1.5px solid var(--border-active);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.cmx-crew-name {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.cmx-crew-role {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+/* ── CMX DANGER ZONE ─────────────────────────────────────────── */
+.cmx-danger-zone {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(224,92,110,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cmx-danger-label {
+  font-size: 12px;
+  color: rgba(224,92,110,0.5);
+  letter-spacing: .05em;
+  font-weight: 500;
+}
+
+/* ── CMX RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .cmx-hero-card { flex-direction: column; }
+  .cmx-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 36px 24px;
+  }
+  .cmx-main { padding: 28px 20px; }
+  .cmx-detail-grid { grid-template-columns: 1fr; }
+  .cmx-stats-row { flex-direction: column; }
+  .cmx-crew-grid { grid-template-columns: 1fr; }
+  .cmx-topbar { flex-direction: column; align-items: flex-start; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   C-MOON  ·  Show Page v2 — Editorial Deep Space
+   Prefixo: cmv2-  (zero conflito com qualquer classe existente)
+═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── CMV2 RESET para a página show ───────────────────────────── */
+.cmv2-page {
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  margin-top: -64px;
+  background: #050810;
+  color: #dde4f5;
+}
+
+/* ── CMV2 TOKENS ─────────────────────────────────────────────── */
+.cmv2-page {
+  --v2-night: #050810;
+  --v2-deep:  #090d1a;
+  --v2-surf:  #0d1222;
+  --v2-raise: #111828;
+  --v2-wire:  rgba(120,145,210,0.10);
+  --v2-wire2: rgba(120,145,210,0.18);
+  --v2-wire3: rgba(120,145,210,0.30);
+  --v2-ink:   #dde4f5;
+  --v2-muted: rgba(221,228,245,0.55);
+  --v2-dim:   rgba(221,228,245,0.25);
+  --v2-gold:  #B8C9E8;
+  --v2-glow:  rgba(184,201,232,0.18);
+}
+
+/* ── CMV2 HERO ───────────────────────────────────────────────── */
+.cmv2-hero {
+  position: relative;
+  min-height: 92vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.cmv2-hero-left {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 0 80px 64px;
+}
+
+.cmv2-hero-right {
+  position: relative;
+  overflow: hidden;
+}
+
+.cmv2-hero-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.cmv2-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, #050810 0%, rgba(5,8,16,0.55) 40%, rgba(5,8,16,0.08) 100%),
+    linear-gradient(to top, #050810 0%, transparent 30%);
+  z-index: 1;
+  clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.cmv2-hero-emoji {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 120px;
+  background: linear-gradient(135deg, #090d1a 0%, #0d1222 100%);
+  opacity: 0.6;
+}
+
+/* ── CMV2 NAV ────────────────────────────────────────────────── */
+.cmv2-nav {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 20;
+  padding: 28px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cmv2-nav-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--v2-gold);
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+.cmv2-nav-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--v2-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.cmv2-nav-back:hover { color: var(--v2-ink); }
+.cmv2-nav-back svg { width: 12px; height: 12px; }
+
+/* ── CMV2 OVERLINE ───────────────────────────────────────────── */
+.cmv2-overline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.cmv2-overline-line { width: 40px; height: 1px; background: var(--v2-gold); flex-shrink: 0; }
+.cmv2-overline-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--v2-gold);
+}
+
+/* ── CMV2 TITLE ──────────────────────────────────────────────── */
+.cmv2-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(48px, 6.5vw, 84px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--v2-ink);
+  margin-bottom: 6px;
+}
+.cmv2-title-sub {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: clamp(26px, 3.2vw, 42px);
+  font-weight: 300;
+  color: var(--v2-muted);
+  display: block;
+  margin-bottom: 4px;
+}
+.cmv2-subtitle {
+  font-family: 'Crimson Pro', serif;
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--v2-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 40px;
+}
+
+/* ── CMV2 RATING ─────────────────────────────────────────────── */
+.cmv2-metric-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.cmv2-metric-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--v2-gold);
+  letter-spacing: -0.03em;
+}
+.cmv2-metric-unit {
+  font-size: 20px;
+  color: var(--v2-dim);
+  margin-bottom: 7px;
+}
+.cmv2-metric-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 6px;
+}
+.cmv2-metric-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--v2-dim);
+}
+
+/* ── CMV2 META ROW ───────────────────────────────────────────── */
+.cmv2-meta-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 36px;
+}
+.cmv2-meta-block {
+  padding-right: 22px;
+  margin-right: 22px;
+  border-right: 1px solid var(--v2-wire);
+}
+.cmv2-meta-block:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+.cmv2-meta-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--v2-dim);
+  margin-bottom: 4px;
+}
+.cmv2-meta-val {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--v2-ink);
+}
+
+/* ── CMV2 STATUS CHIP ────────────────────────────────────────── */
+.cmv2-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 14px 5px 10px;
+  border: 1px solid var(--v2-wire2);
+  border-radius: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--v2-muted);
+  margin-bottom: 36px;
+}
+.cmv2-chip-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.cmv2-chip-dot-green  { background: #5dd6b0; }
+.cmv2-chip-dot-blue   { background: #7c9fff; }
+.cmv2-chip-dot-amber  { background: #e8a84a; }
+
+/* ── CMV2 BUTTONS ────────────────────────────────────────────── */
+.cmv2-cta-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.cmv2-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s;
+  white-space: nowrap;
+  background: transparent;
+}
+.cmv2-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+.cmv2-btn-primary  { background: var(--v2-gold); color: #050810; font-weight: 700; }
+.cmv2-btn-primary:hover { opacity: 0.85; }
+.cmv2-btn-outline  { border: 1px solid var(--v2-wire2); color: var(--v2-muted); }
+.cmv2-btn-outline:hover { border-color: var(--v2-wire3); color: var(--v2-ink); }
+.cmv2-btn-ghost    { color: var(--v2-dim); border: 1px solid transparent; }
+.cmv2-btn-ghost:hover { color: var(--v2-muted); border-color: var(--v2-wire); }
+
+/* ── CMV2 BODY ───────────────────────────────────────────────── */
+.cmv2-body { background: #050810; }
+.cmv2-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+/* ── CMV2 REVIEW / DESCRIÇÃO ─────────────────────────────────── */
+.cmv2-review-wrap {
+  border-top: 1px solid var(--v2-wire);
+  border-bottom: 1px solid var(--v2-wire);
+  padding: 64px 0;
+  position: relative;
+  overflow: hidden;
+}
+.cmv2-bg-num {
+  position: absolute;
+  top: -30px;
+  right: 40px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 240px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--v2-ink);
+  opacity: 0.025;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
+}
+.cmv2-review-grid {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 48px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+.cmv2-review-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--v2-gold);
+  margin-bottom: 12px;
+}
+.cmv2-review-col-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--v2-ink);
+  line-height: 1.3;
+  text-transform: uppercase;
+  font-style: italic;
+}
+.cmv2-quote {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(221,228,245,0.88);
+  padding-left: 24px;
+  border-left: 2px solid rgba(184,201,232,0.2);
+  letter-spacing: 1px;
+}
+
+/* ── CMV2 META STRIP ─────────────────────────────────────────── */
+.cmv2-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--v2-wire);
+  border-bottom: 1px solid var(--v2-wire);
+}
+.cmv2-strip-item {
+  padding: 28px 0;
+  padding-left: 22px;
+  border-right: 1px solid var(--v2-wire);
+}
+.cmv2-strip-item:first-child { padding-left: 0; }
+.cmv2-strip-item:last-child { border-right: none; }
+.cmv2-strip-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--v2-dim);
+  margin-bottom: 8px;
+}
+.cmv2-strip-val {
+  font-family: 'Crimson Pro', serif;
+  font-size: 19px;
+  font-weight: 300;
+  color: var(--v2-ink);
+}
+
+/* ── CMV2 TIMELINE ───────────────────────────────────────────── */
+.cmv2-tl-section {
+  padding: 60px 0;
+  border-bottom: 1px solid var(--v2-wire);
+}
+.cmv2-tl-layout {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 48px;
+}
+.cmv2-tl-sec-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  
+  line-height: 1.6;
+  padding-top: 2px;
+}
+.cmv2-tl-list { display: flex; flex-direction: column; }
+.cmv2-tl-item {
+  display: flex;
+  gap: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--v2-wire);
+  align-items: flex-start;
+}
+.cmv2-tl-item:first-child { padding-top: 0; }
+.cmv2-tl-item:last-child { border-bottom: none; padding-bottom: 0; }
+.cmv2-tl-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--v2-wire3);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.cmv2-tl-dot-on { background: var(--v2-gold); border-color: var(--v2-gold); }
+.cmv2-tl-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--v2-dim);
+  min-width: 90px;
+  padding-top: 1px;
+}
+.cmv2-tl-text {
+  font-size: 14px;
+  color: var(--v2-ink);
+  line-height: 1.5;
+}
+
+/* ── CMV2 SIMILAR GRID ───────────────────────────────────────── */
+.cmv2-sim-section { padding: 60px 0 88px; }
+.cmv2-sim-layout {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 48px;
+}
+.cmv2-sim-sec-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--v2-dim);
+  line-height: 1.7;
+  padding-top: 2px;
+}
+.cmv2-sim-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--v2-wire);
+  border: 1px solid var(--v2-wire);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.cmv2-sim-card {
+  background: var(--v2-deep);
+  padding: 20px 18px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: background 0.15s;
+}
+.cmv2-sim-card:hover { background: var(--v2-surf); }
+.cmv2-sim-type {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--v2-gold);
+}
+.cmv2-sim-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--v2-ink);
+  line-height: 1.2;
+}
+.cmv2-sim-status {
+  font-size: 12px;
+  color: var(--v2-muted);
+  margin-top: 2px;
+}
+
+/* ── CMV2 BADGE STATUS ───────────────────────────────────────── */
+.cmv2-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.cmv2-badge-green { background: rgba(93,214,176,0.10); color: #5dd6b0; border: 1px solid rgba(93,214,176,0.2); }
+.cmv2-badge-blue  { background: rgba(124,159,255,0.10); color: #7c9fff; border: 1px solid rgba(124,159,255,0.2); }
+.cmv2-badge-amber { background: rgba(232,168,74,0.10);  color: #e8a84a; border: 1px solid rgba(232,168,74,0.2); }
+
+/* ── CMV2 DANGER ─────────────────────────────────────────────── */
+.cmv2-danger-wrap {
+  padding: 28px 0 48px;
+  border-top: 1px solid rgba(224,92,110,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.cmv2-danger-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(224,92,110,0.45);
+}
+
+/* ── CMV2 RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .cmv2-hero { grid-template-columns: 1fr; min-height: auto; }
+  .cmv2-hero-left { padding: 120px 28px 60px; }
+  .cmv2-hero-right { height: 55vw; }
+  .cmv2-hero-photo { clip-path: none; }
+  .cmv2-hero-overlay { clip-path: none; }
+  .cmv2-hero-emoji { clip-path: none; }
+  .cmv2-nav { padding: 20px 28px; }
+  .cmv2-inner { padding: 0 28px; }
+  .cmv2-review-grid { grid-template-columns: 1fr; gap: 24px; }
+  .cmv2-strip { grid-template-columns: 1fr 1fr; }
+  .cmv2-tl-layout { grid-template-columns: 1fr; gap: 20px; }
+  .cmv2-sim-layout { grid-template-columns: 1fr; gap: 20px; }
+  .cmv2-sim-grid { grid-template-columns: 1fr 1fr; }
+  .cmv2-bg-num { font-size: 110px; right: 10px; }
 }

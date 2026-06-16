@@ -26,8 +26,8 @@ class StoreCorpoRequest extends FormRequest
         return [
             'nome' => 'required|string|max:255',
             'tipo' => ['required', Rule::in(['planeta', 'Lua', 'asteroide', 'cometa', 'estrela', 'nebulosa'])],
-            'distancia_terra' => 'required|numeric|min:0',
-            'descricao' => 'required|string|max:255',
+            'distancia_terra' => 'required',
+            'descricao' => 'required|string|max:502',
             'diametro_km' => 'required|numeric|min:0',
             'fotos' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
 
