@@ -10,6 +10,9 @@
 
   <ul class="navbar-links">
     @auth
+      @if(Auth::user()->isAdmin())
+        <li><a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a></li>
+      @endif
       <li><a href="{{ route('astronautas.index') }}" class="{{ request()->routeIs('astronautas.*') ? 'active' : '' }}">Astronautas</a></li>
       <li><a href="{{ route('corpos.index') }}"      class="{{ request()->routeIs('corpos.*')     ? 'active' : '' }}">Corpos Celestes</a></li>
       <li><a href="{{ route('missoes.index') }}"     class="{{ request()->routeIs('missoes.*')    ? 'active' : '' }}">Missões</a></li>
@@ -40,6 +43,18 @@
             </svg>
             Meu perfil
           </a>
+
+          @if(Auth::user()->isAdmin())
+          <a href="{{ route('dashboard') }}" class="navbar-dropdown-item">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="1" y="1.5" width="6" height="6" rx="1"/>
+              <rect x="9" y="1.5" width="6" height="4" rx="1"/>
+              <rect x="9" y="7.5" width="6" height="7" rx="1"/>
+              <rect x="1" y="9.5" width="6" height="5" rx="1"/>
+            </svg>
+            Dashboard
+          </a>
+          @endif
 
           <a href="{{ route('welcome') }}" class="navbar-dropdown-item">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">

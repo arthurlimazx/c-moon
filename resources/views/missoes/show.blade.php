@@ -58,7 +58,7 @@
           <span class="cmv2-metric-unit"> dias</span>
         </div>
         <div class="cmv2-metric-info">
-          <div style="font-family:'Crimson Pro',serif; font-style:italic; font-size:16px; color:rgba(221,228,245,0.7);">duração total</div>
+          <div style="font-family:'Outfit',sans-serif; font-style:italic; font-size:16px; color:rgba(221,228,245,0.7);">duração total</div>
           <span class="cmv2-metric-lbl">{{ $missao->astronautas->count() }} {{ $missao->astronautas->count() == 1 ? 'membro na tripulação' : 'membros na tripulação' }}</span>
         </div>
       </div>
@@ -169,7 +169,7 @@
                 @if($a->fotos)
                   <div style="width:40px; height:40px; border-radius:50%; background: url('{{ asset('storage/' . $a->fotos) }}') center/cover no-repeat; border: 1px solid rgba(120,145,210,0.2); margin-bottom:6px; flex-shrink:0;"></div>
                 @else
-                  <div style="width:40px; height:40px; border-radius:50%; background: #111828; border: 1px solid rgba(120,145,210,0.2); display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:700; color:#B8C9E8; margin-bottom:6px; flex-shrink:0;">
+                  <div style="width:40px; height:40px; border-radius:50%; background: #111828; border: 1px solid rgba(120,145,210,0.2); display:flex; align-items:center; justify-content:center; font-family:'Outfit',sans-serif; font-size:13px; font-weight:700; color:#B8C9E8; margin-bottom:6px; flex-shrink:0;">
                     {{ strtoupper(substr($a->nome, 0, 2)) }}
                   </div>
                 @endif

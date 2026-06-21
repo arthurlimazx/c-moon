@@ -54,7 +54,7 @@
           <span class="cmv2-metric-unit"> miss.</span>
         </div>
         <div class="cmv2-metric-info">
-          <div style="font-family:'Crimson Pro',serif; font-style:italic; font-size:16px; color:rgba(221,228,245,0.7);">missões realizadas</div>
+          <div style="font-family:'Outfit',sans-serif; font-style:italic; font-size:16px; color:rgba(221,228,245,0.7);">missões realizadas</div>
           <span class="cmv2-metric-lbl">ao longo da carreira</span>
         </div>
       </div>

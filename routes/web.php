@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AstronautaController;
 use App\Http\Controllers\CorpoController;
 use App\Http\Controllers\MissaoController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -17,6 +18,8 @@ Route::get('/welcome', function () {
 })->middleware(['auth', 'verified'])->name('welcome');
 
 Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::resource('astronautas', AstronautaController::class)->except(['index', 'show']);
     Route::resource('corpos', CorpoController::class)->except(['index', 'show']);
     Route::resource('missoes', MissaoController::class)->except(['index', 'show'])->parameters(['missoes' => 'missao']);

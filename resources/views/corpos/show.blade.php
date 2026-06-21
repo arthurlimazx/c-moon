@@ -51,7 +51,7 @@
           <span class="cmv2-metric-unit"> km</span>
         </div>
         <div class="cmv2-metric-info">
-          <div style="font-family:'Crimson Pro',serif; font-style:italic; font-size:16px; color:rgba(221,228,245,0.7);">diâmetro equatorial</div>
+          <div style="font-family:'Outfit',sans-serif; font-style:italic; font-size:16px; color:rgba(221,228,245,0.7);">diâmetro equatorial</div>
           <span class="cmv2-metric-lbl">{{ $corpo->missoes->count() }} {{ $corpo->missoes->count() == 1 ? 'missão registrada' : 'missões registradas' }}</span>
         </div>
       </div>
