@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    /**
-     * Painel administrativo — visão geral do sistema.
-     */
+   
     public function index()
     {
         $admin = Auth::user();
