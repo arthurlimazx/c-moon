@@ -2114,6 +2114,19 @@ select.form-control {
 .cmx-danger-label { font-size: 12px; color: rgba(217,64,64,0.4); letter-spacing: .05em; font-weight: 500; }
 
 /* ══════════════════════════════════════
+   HOME PAGE — full-bleed
+   (escapa do .container do layout para que
+   hero/about/services/highlight/footer
+   ocupem a largura total da viewport,
+   com a navbar sobreposta de forma translúcida)
+══════════════════════════════════════ */
+.home-page {
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  margin-top: -64px;
+}
+
+/* ══════════════════════════════════════
    CMV2 SHOW PAGE
 ══════════════════════════════════════ */
 .cmv2-page {
@@ -2516,6 +2529,70 @@ select.form-control {
   .index-public-header p { text-align: left; }
   .public-cards-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ══════════════════════════════════════
+   CMX-MODAL — confirm() customizado
+   (substitui o confirm() nativo do navegador,
+   que não pode ser estilizado via CSS)
+══════════════════════════════════════ */
+.cmx-modal-overlay {
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(26,26,24,0.55);
+  backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; visibility: hidden;
+  transition: opacity .18s ease, visibility .18s ease;
+}
+.cmx-modal-overlay.is-open { opacity: 1; visibility: visible; }
+
+.cmx-modal-box {
+  width: 100%; max-width: 380px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 28px;
+  transform: translateY(8px) scale(.97);
+  transition: transform .18s ease;
+}
+.cmx-modal-overlay.is-open .cmx-modal-box { transform: translateY(0) scale(1); }
+
+.cmx-modal-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(217,64,64,0.10);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.cmx-modal-icon svg { width: 20px; height: 20px; stroke: var(--danger); }
+
+.cmx-modal-title {
+  font-family: 'Outfit', sans-serif; font-weight: 600;
+  font-size: 16px; color: var(--text); margin-bottom: 6px;
+}
+.cmx-modal-msg {
+  font-family: 'Outfit', sans-serif; font-size: 14px;
+  line-height: 1.5; color: var(--text-muted); margin-bottom: 24px;
+}
+.cmx-modal-actions {
+  display: flex; justify-content: flex-end; gap: 10px;
+}
+.cmx-modal-btn {
+  font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600;
+  letter-spacing: .02em;
+  padding: 10px 18px; border-radius: var(--radius);
+  cursor: pointer; border: 1px solid transparent;
+  transition: opacity .15s, background .15s, border-color .15s;
+}
+.cmx-modal-btn-cancel {
+  background: transparent; color: var(--text-muted);
+  border-color: var(--border);
+}
+.cmx-modal-btn-cancel:hover { color: var(--text); border-color: var(--border-active); }
+.cmx-modal-btn-confirm {
+  background: var(--danger); color: #fff;
+}
+.cmx-modal-btn-confirm:hover { opacity: .88; }
 
 @media (max-width: 480px) {
   .public-cards-grid { grid-template-columns: 1fr; }

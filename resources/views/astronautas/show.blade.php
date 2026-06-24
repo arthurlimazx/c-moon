@@ -2,16 +2,6 @@
 
 @section('title', $astronauta->nome)
 
-@push('scripts')
-<script>
-  document.querySelectorAll('[data-confirm]').forEach(btn => {
-    btn.addEventListener('click', e => {
-      if (!confirm(btn.dataset.confirm)) e.preventDefault();
-    });
-  });
-</script>
-@endpush
-
 @section('content')
 
 {{-- Escapa do container padrão para layout full-width --}}

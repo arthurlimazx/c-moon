@@ -20,7 +20,7 @@
   @include('layouts.navigation')
 
   <main style="position: relative; z-index: 1; padding-top: 64px;">
-    <div class="container" style="padding-top: 0; padding-bottom: 64px;">
+    <div class="container" >
 
       @if(session('sucesso'))
         <div class="alert alert-success" data-auto-dismiss style="margin-top: 24px;">

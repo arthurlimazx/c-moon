@@ -2,16 +2,6 @@
 
 @section('title', $missao->nome)
 
-@push('scripts')
-<script>
-  document.querySelectorAll('[data-confirm]').forEach(btn => {
-    btn.addEventListener('click', e => {
-      if (!confirm(btn.dataset.confirm)) e.preventDefault();
-    });
-  });
-</script>
-@endpush
-
 @section('content')
 
 @php

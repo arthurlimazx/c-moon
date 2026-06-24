@@ -27,12 +27,71 @@
   });
 })();
 
+// ── CMX MODAL — confirm() customizado ──────────────────────
+function cmxConfirm(message, title = 'Confirmar ação') {
+  return new Promise(resolve => {
+    let overlay = document.getElementById('cmxModalOverlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = 'cmxModalOverlay';
+      overlay.className = 'cmx-modal-overlay';
+      overlay.innerHTML = `
+        <div class="cmx-modal-box" role="alertdialog" aria-modal="true">
+          <div class="cmx-modal-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/>
+            </svg>
+          </div>
+          <div class="cmx-modal-title"></div>
+          <div class="cmx-modal-msg"></div>
+          <div class="cmx-modal-actions">
+            <button type="button" class="cmx-modal-btn cmx-modal-btn-cancel">Cancelar</button>
+            <button type="button" class="cmx-modal-btn cmx-modal-btn-confirm">Confirmar</button>
+          </div>
+        </div>`;
+      document.body.appendChild(overlay);
+    }
+
+    overlay.querySelector('.cmx-modal-title').textContent = title;
+    overlay.querySelector('.cmx-modal-msg').textContent   = message;
+
+    const btnCancel  = overlay.querySelector('.cmx-modal-btn-cancel');
+    const btnConfirm = overlay.querySelector('.cmx-modal-btn-confirm');
+
+    const close = result => {
+      overlay.classList.remove('is-open');
+      document.removeEventListener('keydown', onKeydown);
+      btnCancel.removeEventListener('click', onCancel);
+      btnConfirm.removeEventListener('click', onConfirm);
+      overlay.removeEventListener('click', onBackdrop);
+      resolve(result);
+    };
+    const onCancel   = () => close(false);
+    const onConfirm  = () => close(true);
+    const onBackdrop = e => { if (e.target === overlay) close(false); };
+    const onKeydown  = e => { if (e.key === 'Escape') close(false); };
+
+    btnCancel.addEventListener('click', onCancel);
+    btnConfirm.addEventListener('click', onConfirm);
+    overlay.addEventListener('click', onBackdrop);
+    document.addEventListener('keydown', onKeydown);
+
+    overlay.classList.add('is-open');
+    btnCancel.focus();
+  });
+}
+
 // ── DELETE CONFIRM ─────────────────────────────────────────
 (function () {
   document.querySelectorAll('[data-confirm]').forEach(btn => {
     btn.addEventListener('click', e => {
+      e.preventDefault();
       const msg = btn.dataset.confirm || 'Confirmar exclusão?';
-      if (!confirm(msg)) e.preventDefault();
+      cmxConfirm(msg, 'Confirmar exclusão').then(ok => {
+        if (!ok) return;
+        if (btn.form) btn.form.submit();
+        else if (btn.tagName === 'A' && btn.href) window.location.href = btn.href;
+      });
     });
   });
 })();

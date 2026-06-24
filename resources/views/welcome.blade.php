@@ -1,100 +1,10 @@
-@extends ('layouts.app')
+@extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Início')
 
 @section('content')
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>C-Moon — Exploração Espacial</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('css/cmoon.css') }}">
-  
-
-</head>
-<body>
-
-<div class="starfield"><canvas id="stars"></canvas></div>
-<nav class="navbar">
-  <a href="{{ route('welcome') }}" class="navbar-brand">
-    <span class="dot"></span>
-    C-Moon
-  </a>
-
-  <ul class="navbar-links">
-    @auth
-      @if(Auth::user()->isAdmin())
-        <li><a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a></li>
-      @endif
-      <li><a href="{{ route('astronautas.index') }}" class="{{ request()->routeIs('astronautas.*') ? 'active' : '' }}">Astronautas</a></li>
-      <li><a href="{{ route('corpos.index') }}"      class="{{ request()->routeIs('corpos.*')     ? 'active' : '' }}">Corpos Celestes</a></li>
-      <li><a href="{{ route('missoes.index') }}"     class="{{ request()->routeIs('missoes.*')    ? 'active' : '' }}">Missões</a></li>
-    @endauth
-  </ul>
-
-  <div class="navbar-actions">
-    @auth
-      <a href="{{ route('astronautas.index') }}" class="btn btn-ghost btn-sm">Dashboard</a>
-
-      {{-- Dropdown de perfil --}}
-      <div class="navbar-user" id="userMenu">
-        <button class="navbar-user-btn" onclick="toggleUserDropdown()">
-          <span class="navbar-avatar">{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</span>
-          {{ explode(' ', Auth::user()->name)[0] }}
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
-
-        <div class="navbar-dropdown" id="userDropdown">
-          <div class="navbar-dropdown-header">
-            <div class="navbar-dropdown-name">{{ Auth::user()->name }}</div>
-            <div class="navbar-dropdown-email">{{ Auth::user()->email }}</div>
-          </div>
-
-          <a href="{{ route('profile.edit') }}" class="navbar-dropdown-item">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M8 8a3 3 0 100-6 3 3 0 000 6z"/>
-              <path d="M2 14s.5-4 6-4 6 4 6 4" stroke-linecap="round"/>
-            </svg>
-            Meu perfil
-          </a>
-
-          <a href="{{ route('astronautas.index') }}" class="navbar-dropdown-item">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect x="1" y="3" width="14" height="10" rx="1.5"/>
-              <path d="M5 7h6M5 10h4" stroke-linecap="round"/>
-            </svg>
-            Dashboard
-          </a>
-
-          <div class="navbar-dropdown-divider"></div>
-
-          <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="navbar-dropdown-item danger">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M10 3h3a1 1 0 011 1v8a1 1 0 01-1 1h-3" stroke-linecap="round"/>
-                <path d="M7 11l3-3-3-3M10 8H2" stroke-linecap="round"/>
-              </svg>
-              Sair
-            </button>
-          </form>
-        </div>
-      </div>
-    @else
-      <a href="{{ route('login') }}" class="btn btn-ghost btn-sm">Entrar</a>
-      @if (Route::has('register'))
-        <a href="{{ route('register') }}" class="btn btn-primary btn-sm">Criar conta</a>
-      @endif
-    @endauth
-  </div>
-</nav>
+<div class="home-page">
 
 {{-- ══ HERO ══ --}}
 <section class="hero">
@@ -196,7 +106,8 @@
         </p>
       </div>
     </div>
-   
+  </div>
+</section>
 
 {{-- ══ DESTAQUES ALTERNADOS ══ --}}
 <section class="highlight">
@@ -290,45 +201,6 @@
   </div>
 </footer>
 
-<script src="{{ asset('js/cmoon.js') }}"></script>
-<script>
-// Navbar scroll
-const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 20);
-}, { passive: true });
+</div>{{-- /home-page --}}
 
-// Dropdown
-function toggleDropdown() {
-  document.getElementById('navDropdown').classList.toggle('open');
-}
-document.addEventListener('click', e => {
-  const menu = document.getElementById('userMenu');
-  if (menu && !menu.contains(e.target))
-    document.getElementById('navDropdown')?.classList.remove('open');
-});
-
-// Parallax planeta hero
-const planet = document.getElementById('heroPlanet');
-if (planet) {
-  document.addEventListener('mousemove', e => {
-    const dx = (e.clientX / innerWidth - .5) * 18;
-    const dy = (e.clientY / innerHeight - .5) * 18;
-    planet.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
-  });
-}
-
-// Scroll reveal
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(el => {
-    if (el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-
-</body>
-
-</html>
-
-
+@endsection
