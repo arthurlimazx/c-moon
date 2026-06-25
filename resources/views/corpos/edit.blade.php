@@ -19,7 +19,6 @@
       <div class="form-card-body">
         <div class="form-grid">
 
-          {{-- FOTO UPLOAD --}}
           <div class="form-group form-group-full">
             <label class="form-label">Imagem do corpo celeste <span style="color:var(--text-dim); font-weight:400;">(opcional)</span></label>
             <div class="photo-upload-wrap photo-upload-wide" id="photoWrap">

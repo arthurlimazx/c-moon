@@ -1,8 +1,3 @@
-/* C-MOON — cmoon.js — v2 editorial */
-
-// ── SEM STARFIELD (removido) ───────────────────────────────
-
-// ── NAVBAR SCROLL ──────────────────────────────────────────
 (function () {
   const nav = document.querySelector('.navbar');
   if (!nav) return;
@@ -15,7 +10,6 @@
   }, { passive: true });
 })();
 
-// ── ALERT AUTO-DISMISS ─────────────────────────────────────
 (function () {
   document.querySelectorAll('.alert[data-auto-dismiss]').forEach(el => {
     setTimeout(() => {
@@ -27,7 +21,6 @@
   });
 })();
 
-// ── CMX MODAL — confirm() customizado ──────────────────────
 function cmxConfirm(message, title = 'Confirmar ação') {
   return new Promise(resolve => {
     let overlay = document.getElementById('cmxModalOverlay');
@@ -81,7 +74,6 @@ function cmxConfirm(message, title = 'Confirmar ação') {
   });
 }
 
-// ── DELETE CONFIRM ─────────────────────────────────────────
 (function () {
   document.querySelectorAll('[data-confirm]').forEach(btn => {
     btn.addEventListener('click', e => {
@@ -96,7 +88,6 @@ function cmxConfirm(message, title = 'Confirmar ação') {
   });
 })();
 
-// ── STAGGER ROWS ──────────────────────────────────────────
 (function () {
   document.querySelectorAll('tbody tr').forEach((row, i) => {
     row.style.opacity   = '0';
@@ -104,7 +95,6 @@ function cmxConfirm(message, title = 'Confirmar ação') {
   });
 })();
 
-// ── AUTH — password toggle & strength ─────────────────────
 (function () {
   document.querySelectorAll('.auth-toggle-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -150,7 +140,6 @@ function cmxConfirm(message, title = 'Confirmar ação') {
   });
 })();
 
-// ── SCROLL REVEAL ─────────────────────────────────────────
 (function () {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(el => {
@@ -163,7 +152,6 @@ function cmxConfirm(message, title = 'Confirmar ação') {
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 })();
 
-// ── HOME — PROFILE DROPDOWN ─────────────────────────────────
 (function () {
   const dd   = document.getElementById('userDropdown');
   const menu = document.getElementById('userMenu');

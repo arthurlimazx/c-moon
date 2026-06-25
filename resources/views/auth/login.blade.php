@@ -7,34 +7,33 @@
   <link rel="stylesheet" href="{{ asset('css/cmoon.css') }}">
 </head>
 <body>
- 
+
 <div class="starfield"><canvas id="stars"></canvas></div>
- 
+
 <div class="auth-layout">
- 
-  {{-- ── PAINEL ESQUERDO ── --}}
+
   <div class="auth-panel">
 
     <div class="auth-panel-placeholder"></div>
     <div class="auth-panel-orbit"></div>
     <div class="auth-panel-dot"></div>
- 
+
     <div class="auth-panel-content">
       <a href="{{ route('welcome') }}" class="auth-panel-logo">
         <span class="dot"></span>
         C-Moon
       </a>
     </div>
- 
+
     <div class="auth-panel-content auth-panel-quote">
-      
+
       <blockquote>
         A Terra é o berço da humanidade,<br>
         mas <em>não se pode viver</em><br>
         no berço para sempre.
       </blockquote>
       <cite>— Konstantin Tsiolkovsky</cite>
- 
+
       <div class="auth-panel-tags">
         <span class="auth-panel-tag"><span>🚀</span> Missões</span>
         <span class="auth-panel-tag"><span>🧑‍🚀</span> Astronautas</span>
@@ -42,24 +41,23 @@
       </div>
     </div>
   </div>
- 
-  {{-- ── FORMULÁRIO DIREITO ── --}}
+
   <div class="auth-form-side">
     <div class="auth-form-wrap animate-up">
- 
+
       <div class="auth-form-header">
         <div class="auth-form-eyebrow">Acesso ao sistema</div>
         <h1>Bem-vindo de volta</h1>
         <p>Entre com suas credenciais para acessar o painel de controle.</p>
       </div>
- 
+
       @if (session('status'))
         <div class="auth-status">{{ session('status') }}</div>
       @endif
- 
+
       <form method="POST" action="{{ route('login') }}">
         @csrf
- 
+
         <div class="form-group">
           <label class="form-label" for="email">E-mail</label>
           <div class="auth-input-wrap">
@@ -75,7 +73,7 @@
           </div>
           @error('email') <span class="form-error">✕ {{ $message }}</span> @enderror
         </div>
- 
+
         <div class="form-group">
           <label class="form-label" for="password">Senha</label>
           <div class="auth-input-wrap">
@@ -100,7 +98,7 @@
           </div>
           @error('password') <span class="form-error">✕ {{ $message }}</span> @enderror
         </div>
- 
+
         <div class="auth-remember">
           <label>
             <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -110,21 +108,21 @@
             <a href="{{ route('password.request') }}" class="auth-link-dim">Esqueceu a senha?</a>
           @endif
         </div>
- 
+
         <button type="submit" class="auth-submit">Entrar no sistema</button>
       </form>
- 
+
       @if (Route::has('register'))
         <div class="auth-form-footer">
           Não tem conta? <a href="{{ route('register') }}">Criar conta</a>
         </div>
       @endif
- 
+
     </div>
   </div>
- 
+
 </div>
- 
+
 <script src="{{ asset('js/cmoon.js') }}"></script>
 </body>
 </html>

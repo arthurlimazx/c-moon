@@ -10,7 +10,6 @@
 
 <div class="cmv2-page">
 
-  {{-- ═══════════════ HERO ═══════════════ --}}
   <section class="cmv2-hero">
 
     <nav class="cmv2-nav">
@@ -41,7 +40,6 @@
         {{ \Carbon\Carbon::parse($missao->data_lancamento)->format('Y') }}
       </p>
 
-      {{-- Métrica destaque: duração --}}
       <div class="cmv2-metric-row">
         <div>
           <span class="cmv2-metric-num">{{ $dias }}</span>
@@ -100,10 +98,8 @@
 
   </section>
 
-  {{-- ═══════════════ BODY ═══════════════ --}}
   <div class="cmv2-body">
 
-    {{-- DESCRIÇÃO --}}
     @if($missao->descricao)
     <div class="cmv2-review-wrap">
       <div class="cmv2-bg-num">01</div>
@@ -119,7 +115,6 @@
     </div>
     @endif
 
-    {{-- META STRIP --}}
     <div class="cmv2-inner">
       <div class="cmv2-strip">
         <div class="cmv2-strip-item">
@@ -146,7 +141,6 @@
       </div>
     </div>
 
-    {{-- TRIPULAÇÃO --}}
     @if($missao->astronautas->isNotEmpty())
     <div class="cmv2-tl-section">
       <div class="cmv2-inner">
@@ -175,7 +169,6 @@
     </div>
     @endif
 
-    {{-- DANGER --}}
     @if (Auth::user()->isAdmin())
     <div class="cmv2-inner">
       <div class="cmv2-danger-wrap">

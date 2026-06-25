@@ -7,25 +7,24 @@
   <link rel="stylesheet" href="{{ asset('css/cmoon.css') }}">
 </head>
 <body>
- 
+
 <div class="starfield"><canvas id="stars"></canvas></div>
- 
+
 <div class="auth-layout">
- 
-  {{-- ── PAINEL ESQUERDO ── --}}
+
   <div class="auth-panel">
-    {{-- Troque o src pela sua imagem: <img src="{{ asset('img/auth-bg.jpg') }}" class="auth-panel-bg" alt=""> --}}
+
     <div class="auth-panel-placeholder"></div>
     <div class="auth-panel-orbit"></div>
     <div class="auth-panel-dot"></div>
- 
+
     <div class="auth-panel-content">
       <a href="{{ route('welcome') }}" class="auth-panel-logo">
         <span class="dot"></span>
         C-Moon
       </a>
     </div>
- 
+
     <div class="auth-panel-content auth-panel-quote">
       <blockquote>
         O universo não é apenas mais estranho<br>
@@ -33,7 +32,7 @@
         <em>do que podemos supor.</em>
       </blockquote>
       <cite>— J.B.S. Haldane</cite>
- 
+
       <div class="auth-panel-tags">
         <span class="auth-panel-tag"><span>🌌</span> Exploração</span>
         <span class="auth-panel-tag"><span>📡</span> Monitoramento</span>
@@ -41,20 +40,19 @@
       </div>
     </div>
   </div>
- 
-  {{-- ── FORMULÁRIO DIREITO ── --}}
+
   <div class="auth-form-side">
     <div class="auth-form-wrap animate-up">
- 
+
       <div class="auth-form-header">
         <div class="auth-form-eyebrow">Nova conta</div>
         <h1>Criar sua conta</h1>
         <p>Junte-se ao sistema de exploração e controle espacial.</p>
       </div>
- 
+
       <form method="POST" action="{{ route('register') }}">
         @csrf
- 
+
         <div class="form-group">
           <label class="form-label" for="name">Nome completo</label>
           <div class="auth-input-wrap">
@@ -70,7 +68,7 @@
           </div>
           @error('name') <span class="form-error">✕ {{ $message }}</span> @enderror
         </div>
- 
+
         <div class="form-group">
           <label class="form-label" for="email">E-mail</label>
           <div class="auth-input-wrap">
@@ -86,7 +84,7 @@
           </div>
           @error('email') <span class="form-error">✕ {{ $message }}</span> @enderror
         </div>
- 
+
         <div class="auth-form-row">
           <div class="form-group" style="margin-bottom:0;">
             <label class="form-label" for="password">Senha</label>
@@ -112,7 +110,7 @@
             </div>
             @error('password') <span class="form-error">✕ {{ $message }}</span> @enderror
           </div>
- 
+
           <div class="form-group" style="margin-bottom:0;">
             <label class="form-label" for="password_confirmation">Confirmar</label>
             <div class="auth-input-wrap">
@@ -136,8 +134,7 @@
             </div>
           </div>
         </div>
- 
-        {{-- Força da senha --}}
+
         <div class="auth-strength" id="authStrength" style="margin-top:12px; margin-bottom:20px;">
           <div class="auth-strength-bars">
             <div class="auth-strength-bar"></div>
@@ -147,19 +144,19 @@
           </div>
           <span class="auth-strength-label">—</span>
         </div>
- 
+
         <button type="submit" class="auth-submit">Criar conta</button>
       </form>
- 
+
       <div class="auth-form-footer">
         Já tem conta? <a href="{{ route('login') }}">Entrar</a>
       </div>
- 
+
     </div>
   </div>
- 
+
 </div>
- 
+
 <script src="{{ asset('js/cmoon.js') }}"></script>
 </body>
 </html>

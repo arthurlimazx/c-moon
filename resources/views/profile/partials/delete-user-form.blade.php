@@ -1,19 +1,16 @@
 <div class="form-card" style="border-color: rgba(224,92,110,0.2);">
   <div class="form-card-body">
     <div class="section-label" style="margin-bottom:6px; color:var(--danger);">Zona de perigo</div>
-    
+
     <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">
       Uma vez que você excluir sua conta, todos os seus recursos e dados serão apagados permanentemente.
     </p>
-
-
-    
 
 <div class="cmoon-modal-backdrop" id="deleteAccountModal"
      data-open="{{ $errors->userDeletion->isNotEmpty() ? 'true' : 'false' }}">
   <div class="cmoon-modal">
     <div class="cmoon-modal-header">
-      
+
       <h2 style="font-size:28px; letter-spacing:.06em; color:var(--danger); margin-bottom:8px;">
         Excluir conta?
       </h2>
@@ -37,7 +34,7 @@
       </div>
 
       <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:24px;">
-     
+
         <button type="button" class="btn btn-ghost"
           onclick="document.getElementById('deleteAccountModal').classList.remove('open')">
           Cancelar
@@ -54,15 +51,12 @@
   const modal = document.getElementById('deleteAccountModal');
   if (!modal) return;
 
-  // Reabre se houver erro de validação (lido via data attribute, sem Blade no JS)
   if (modal.dataset.open === 'true') modal.classList.add('open');
 
-  // Fecha ao clicar no backdrop
   modal.addEventListener('click', function (e) {
     if (e.target === modal) modal.classList.remove('open');
   });
 
-  // Fecha com Escape
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') modal.classList.remove('open');
   });

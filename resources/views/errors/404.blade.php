@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/cmoon.css') }}">
   <style>
-    /* ── 404 PAGE ── */
+
     .error-page {
       position: relative;
       z-index: 1;
@@ -21,7 +21,6 @@
       overflow: hidden;
     }
 
-    /* Glow de fundo */
     .error-page::before {
       content: '';
       position: fixed;
@@ -48,7 +47,6 @@
       animation: fadeUp .6s ease both;
     }
 
-    /* Planeta / ícone central */
     .error-planet {
       position: relative;
       width: 140px;
@@ -74,7 +72,6 @@
       z-index: 2;
     }
 
-    /* Anel em volta do planeta */
     .error-planet-ring {
       position: absolute;
       inset: -22px;
@@ -104,7 +101,6 @@
       animation: orbit-spin 32s linear reverse infinite;
     }
 
-    /* Número 404 */
     .error-code {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(80px, 15vw, 120px);
@@ -167,7 +163,6 @@
       flex-wrap: wrap;
     }
 
-    /* Linha decorativa */
     .error-divider {
       width: 1px;
       height: 48px;
@@ -175,7 +170,6 @@
       margin: 32px auto;
     }
 
-    /* Sugestões de rotas */
     .error-links {
       display: flex;
       align-items: center;
@@ -211,7 +205,6 @@
       transform: translateY(-1px);
     }
 
-    /* Logo topo */
     .error-logo {
       position: fixed;
       top: 24px;

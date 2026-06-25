@@ -1,28 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
 
-/* ══════════════════════════════════════════════
-   C-MOON  ·  Paleta Editorial — Light Cream
-   Inspirado em landonorris.com
-══════════════════════════════════════════════ */
-
 :root {
-  /* Paleta principal — creme/off-white */
+
   --bg:           #ECEAE3;
   --bg-2:         #E5E2DB;
   --bg-3:         #DDD9D0;
   --surface:      #D8D4CB;
   --surface-2:    #CFCBC2;
 
-  /* Textos */
   --text:         #1A1A18;
   --text-muted:   #5C5A54;
   --text-dim:     #9B9890;
 
-  /* Bordas */
   --border:       rgba(26,26,24,0.10);
   --border-active:rgba(26,26,24,0.22);
 
-  /* Acento — verde limão Lando */
   --accent:       #C1FF1E;
   --accent-dark:  #9FD400;
   --accent-2:     #1A1A18;
@@ -54,7 +46,6 @@ body {
   overflow-x: hidden;
 }
 
-/* SEM starfield */
 .starfield { display: none; }
 
 h1, h2, h3, h4 {
@@ -64,9 +55,6 @@ h1, h2, h3, h4 {
 }
 a { color: inherit; text-decoration: none; }
 
-/* ══════════════════════════════════════
-   NAVBAR
-══════════════════════════════════════ */
 .navbar {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -132,9 +120,6 @@ a { color: inherit; text-decoration: none; }
 
 .navbar-actions { display: flex; gap: 8px; align-items: center; }
 
-/* ══════════════════════════════════════
-   BUTTONS
-══════════════════════════════════════ */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -198,7 +183,6 @@ a { color: inherit; text-decoration: none; }
 .btn-lg { padding: 14px 36px; font-size: 15px; }
 .btn:active { transform: scale(.97); }
 
-/* btn-gold → agora é accent verde */
 .btn-gold {
   display: inline-flex;
   align-items: center;
@@ -234,9 +218,6 @@ a { color: inherit; text-decoration: none; }
 }
 .btn-ghost-slim:hover { color: var(--text); gap: 14px; }
 
-/* ══════════════════════════════════════
-   LAYOUT
-══════════════════════════════════════ */
 .page {
   position: relative;
   z-index: 1;
@@ -252,11 +233,6 @@ a { color: inherit; text-decoration: none; }
 
 .container-sm { max-width: 700px; margin: 0 auto; padding: 0 48px; }
 
-
-
-/* ══════════════════════════════════════
-   PAGE HEADER
-══════════════════════════════════════ */
 .page-header {
   padding: 64px 0 40px;
   display: grid;
@@ -299,9 +275,6 @@ a { color: inherit; text-decoration: none; }
   max-width: 440px;
 }
 
-/* ══════════════════════════════════════
-   CARDS
-══════════════════════════════════════ */
 .card {
   background: var(--bg-2);
   border: 1px solid var(--border);
@@ -333,7 +306,6 @@ a { color: inherit; text-decoration: none; }
   color: var(--text-muted);
 }
 
-/* Cards da index para usuários normais */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -375,9 +347,6 @@ a { color: inherit; text-decoration: none; }
   color: var(--text);
 }
 
-/* ══════════════════════════════════════
-   TABLES
-══════════════════════════════════════ */
 .table-wrap { overflow-x: auto; }
 
 table { width: 100%; border-collapse: collapse; background-color: var(--bg-2); }
@@ -428,9 +397,6 @@ tbody td {
 .badge-red   { background: rgba(217,64,64,0.10);  color: var(--danger); }
 .badge-gray  { background: rgba(26,26,24,0.06);   color: var(--text-muted); }
 
-/* ══════════════════════════════════════
-   FORMS
-══════════════════════════════════════ */
 .form-group { margin-bottom: 24px; }
 
 .form-label {
@@ -513,9 +479,6 @@ select.form-control {
   cursor: pointer;
 }
 
-/* ══════════════════════════════════════
-   ALERTS
-══════════════════════════════════════ */
 .alert {
   padding: 14px 20px;
   border-radius: var(--radius);
@@ -531,9 +494,6 @@ select.form-control {
 .alert-success { background: rgba(74,124,89,0.08); border-color: rgba(74,124,89,0.2); color: var(--accent-3); }
 .alert-danger  { background: rgba(217,64,64,0.06); border-color: rgba(217,64,64,0.18); color: var(--danger); }
 
-/* ══════════════════════════════════════
-   STATS STRIP
-══════════════════════════════════════ */
 .stats-strip {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -593,9 +553,6 @@ select.form-control {
   margin-top: 4px;
 }
 
-/* ══════════════════════════════════════
-   SHOW/DETAIL
-══════════════════════════════════════ */
 .detail-grid {
   display: grid;
   grid-template-columns: 1fr 360px;
@@ -659,9 +616,6 @@ select.form-control {
   flex-shrink: 0;
 }
 
-/* ══════════════════════════════════════
-   EMPTY STATE
-══════════════════════════════════════ */
 .empty-state {
   text-align: center;
   padding: 80px 20px;
@@ -676,9 +630,6 @@ select.form-control {
 .empty-state h3 { font-size: 20px; margin-bottom: 8px; color: var(--text); }
 .empty-state p  { color: var(--text-muted); font-size: 14px; }
 
-/* ══════════════════════════════════════
-   FORM PAGE
-══════════════════════════════════════ */
 .form-page { padding: 56px 0 88px; }
 .form-page .page-header { margin-bottom: 40px; }
 
@@ -700,9 +651,6 @@ select.form-control {
   justify-content: flex-end;
 }
 
-/* ══════════════════════════════════════
-   HERO — Landing
-══════════════════════════════════════ */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -720,7 +668,6 @@ select.form-control {
     radial-gradient(ellipse 50% 70% at 20% 80%, rgba(26,26,24,0.04) 0%, transparent 50%);
 }
 
-/* Grade sutil */
 .hero-grid {
   position: absolute;
   inset: 0;
@@ -807,7 +754,6 @@ select.form-control {
   background: var(--bg-2);
 }
 
-/* Elemento gráfico decorativo no hero-right */
 .hero-deco {
   position: absolute;
   inset: 0;
@@ -827,7 +773,6 @@ select.form-control {
 .hero-deco-ring:nth-child(3) { width: 200px; height: 200px; border-color: rgba(193,255,30,0.20); }
 .hero-deco-ring:nth-child(4) { width: 80px; height: 80px; background: var(--accent); border: none; border-radius: 50%; opacity: 0.9; }
 
-/* Texto flutuante hero */
 .hero-float-text {
   position: absolute;
   right: 48px;
@@ -844,7 +789,6 @@ select.form-control {
   animation: fadeUp .8s 1s ease both;
 }
 
-/* Stats bottom do hero */
 .hero-bottom {
   position: relative;
   z-index: 2;
@@ -882,9 +826,6 @@ select.form-control {
   letter-spacing: .04em;
 }
 
-/* ══════════════════════════════════════
-   ABOUT SECTION
-══════════════════════════════════════ */
 .about {
   position: relative;
   z-index: 1;
@@ -924,7 +865,7 @@ select.form-control {
   text-align: center;
   justify-content: center;
   line-height: 1.85;
-  
+
 }
 
 .about-right {
@@ -997,9 +938,6 @@ select.form-control {
 }
 .stat-dark-link:hover { gap: 14px; }
 
-/* ══════════════════════════════════════
-   MÓDULOS / SERVICES
-══════════════════════════════════════ */
 .services {
   position: relative;
   z-index: 1;
@@ -1045,9 +983,6 @@ select.form-control {
   background: var(--text-muted);
 }
 
-/* ══════════════════════════════════════
-   INDEX CARDS — usuários normais
-══════════════════════════════════════ */
 .index-public {
   padding: 64px 0 88px;
   background: var(--bg);
@@ -1172,16 +1107,12 @@ select.form-control {
 }
 .index-card-link:hover { color: var(--text); }
 
-/* Grid de cards público */
 .public-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px;
 }
 
-/* ══════════════════════════════════════
-   HIGHLIGHTS
-══════════════════════════════════════ */
 .highlight {
   position: relative;
   z-index: 1;
@@ -1204,8 +1135,6 @@ select.form-control {
   align-items: center;
   justify-content: center;
 }
-
-
 
 .hl-accent-dot {
   width: 20px; height: 20px;
@@ -1276,9 +1205,6 @@ select.form-control {
 }
 .highlight-link:hover { gap: 16px; border-color: var(--text); }
 
-/* ══════════════════════════════════════
-   FOOTER
-══════════════════════════════════════ */
 .footer {
   position: relative;
   z-index: 1;
@@ -1328,9 +1254,6 @@ select.form-control {
 .footer-links a:hover { color: rgba(236,234,227,0.8); }
 .footer-copy { font-size: 12px; color: rgba(236,234,227,0.25); font-weight: 300; }
 
-/* ══════════════════════════════════════
-   DASHBOARD
-══════════════════════════════════════ */
 .dash-section-label {
   font-size: 10px;
   letter-spacing: .18em;
@@ -1361,9 +1284,6 @@ select.form-control {
 }
 .dash-card:hover { border-color: var(--border-active); transform: translateY(-2px); }
 
-/* ══════════════════════════════════════
-   LOGIN / AUTH
-══════════════════════════════════════ */
 .login-page {
   min-height: 100vh;
   display: flex;
@@ -1387,7 +1307,6 @@ select.form-control {
 .login-brand p { color: var(--text-muted); font-size: 14px; }
 .login-divider { height: 1px; background: var(--border); margin: 28px 0; }
 
-/* AUTH LAYOUT */
 .auth-layout {
   min-height: 100vh;
   display: grid;
@@ -1633,9 +1552,6 @@ select.form-control {
   content: ''; flex: 1; height: 1px; background: var(--border);
 }
 
-/* ══════════════════════════════════════
-   NAVBAR USER DROPDOWN
-══════════════════════════════════════ */
 .navbar-user {
   display: flex; align-items: center; gap: 10px; position: relative;
 }
@@ -1708,9 +1624,6 @@ select.form-control {
 .navbar-dropdown-item.danger:hover { background: rgba(217,64,64,0.06); color: var(--danger); }
 .navbar-dropdown-divider { height: 1px; background: var(--border); margin: 6px 0; }
 
-/* ══════════════════════════════════════
-   PHOTO UPLOAD WIDGET
-══════════════════════════════════════ */
 .photo-upload-wrap {
   position: relative;
   border: 1px dashed var(--border-active);
@@ -1801,9 +1714,6 @@ select.form-control {
   border-color: var(--danger);
 }
 
-/* ══════════════════════════════════════
-   PHOTO BANNER
-══════════════════════════════════════ */
 .photo-banner {
   position: relative;
   margin: 0 -48px;
@@ -1829,9 +1739,6 @@ select.form-control {
   align-items: flex-end;
 }
 
-/* ══════════════════════════════════════
-   SHOW PAGE (cmx-* prefix)
-══════════════════════════════════════ */
 .cmx-show-wrap { margin-top: 28px; margin-bottom: 40px; }
 
 .cmx-hero-card {
@@ -2113,22 +2020,12 @@ select.form-control {
 }
 .cmx-danger-label { font-size: 12px; color: rgba(217,64,64,0.4); letter-spacing: .05em; font-weight: 500; }
 
-/* ══════════════════════════════════════
-   HOME PAGE — full-bleed
-   (escapa do .container do layout para que
-   hero/about/services/highlight/footer
-   ocupem a largura total da viewport,
-   com a navbar sobreposta de forma translúcida)
-══════════════════════════════════════ */
 .home-page {
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
   margin-top: -64px;
 }
 
-/* ══════════════════════════════════════
-   CMV2 SHOW PAGE
-══════════════════════════════════════ */
 .cmv2-page {
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
@@ -2167,7 +2064,7 @@ select.form-control {
 }
 .cmv2-hero-overlay {
   position: absolute; inset: 0;
-  
+
 }
 .cmv2-hero-emoji {
   position: absolute; inset: 0;
@@ -2362,9 +2259,6 @@ select.form-control {
   letter-spacing: 0.1em; text-transform: uppercase; color: rgba(217,64,64,0.45);
 }
 
-/* ══════════════════════════════════════
-   SECTION LABEL, UTILS
-══════════════════════════════════════ */
 .section-label {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 13px; font-weight: 700;
@@ -2394,9 +2288,6 @@ select.form-control {
 .gap-12 { gap: 12px; }
 .gap-16 { gap: 16px; }
 
-/* ══════════════════════════════════════
-   ANIMATIONS
-══════════════════════════════════════ */
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50%       { opacity: .45; transform: scale(0.75); }
@@ -2428,9 +2319,6 @@ select.form-control {
 .reveal-delay-3 { transition-delay: .3s; }
 .reveal-delay-4 { transition-delay: .4s; }
 
-/* ══════════════════════════════════════
-   SHOW PAGE v1 (show-hero-*)
-══════════════════════════════════════ */
 .show-hero-body { display: flex; padding: 0; position: relative; gap: 0; }
 .show-hero-left {
   background: var(--bg-2); width: 300px; flex-shrink: 0;
@@ -2467,14 +2355,6 @@ select.form-control {
 }
 .btn-hero:hover { background: var(--bg-3); border-color: var(--border-active); color: var(--text); }
 
-/* ══════════════════════════════════════
-   ERROR 404
-══════════════════════════════════════ */
-/* já herdado */
-
-/* ══════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════ */
 @media (max-width: 1024px) {
   .wrap { padding: 0 32px; }
   .hero-left { padding: 120px 40px 70px; }
@@ -2530,11 +2410,6 @@ select.form-control {
   .public-cards-grid { grid-template-columns: 1fr 1fr; }
 }
 
-/* ══════════════════════════════════════
-   CMX-MODAL — confirm() customizado
-   (substitui o confirm() nativo do navegador,
-   que não pode ser estilizado via CSS)
-══════════════════════════════════════ */
 .cmx-modal-overlay {
   position: fixed; inset: 0; z-index: 999;
   background: rgba(26,26,24,0.55);

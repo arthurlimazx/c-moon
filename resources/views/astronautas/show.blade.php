@@ -4,13 +4,10 @@
 
 @section('content')
 
-{{-- Escapa do container padrão para layout full-width --}}
 <div class="cmv2-page">
 
-  {{-- ═══════════════ HERO ═══════════════ --}}
   <section class="cmv2-hero">
 
-    {{-- NAV overlay --}}
     <nav class="cmv2-nav">
       <a href="{{ route('astronautas.index') }}" class="cmv2-nav-logo">C·Moon</a>
       <a href="{{ route('astronautas.index') }}" class="cmv2-nav-back">
@@ -19,7 +16,6 @@
       </a>
     </nav>
 
-    {{-- LEFT: texto --}}
     <div class="cmv2-hero-left">
       <div class="cmv2-overline">
         <div class="cmv2-overline-line"></div>
@@ -37,7 +33,6 @@
 
       <p class="cmv2-subtitle">{{ $astronauta->especialidade }} &nbsp;·&nbsp; {{ $astronauta->nacionalidade }}</p>
 
-      {{-- Métrica destaque --}}
       <div class="cmv2-metric-row">
         <div>
           <span class="cmv2-metric-num">{{ $astronauta->num_missoes }}</span>
@@ -49,7 +44,6 @@
         </div>
       </div>
 
-      {{-- Meta pills --}}
       <div class="cmv2-meta-row">
         <div class="cmv2-meta-block">
           <div class="cmv2-meta-lbl">Especialidade</div>
@@ -65,7 +59,6 @@
         </div>
       </div>
 
-      {{-- Status chip --}}
       <div class="cmv2-chip">
         @if($astronauta->status === 'ativo')
           <div class="cmv2-chip-dot cmv2-chip-dot-green"></div>Ativo
@@ -76,7 +69,6 @@
         @endif
       </div>
 
-      {{-- CTAs --}}
       <div class="cmv2-cta-row">
         @if (Auth::user()->isAdmin())
           <a href="{{ route('astronautas.edit', $astronauta) }}" class="cmv2-btn cmv2-btn-primary">
@@ -88,7 +80,6 @@
       </div>
     </div>
 
-    {{-- RIGHT: foto --}}
     <div class="cmv2-hero-right">
       @if($astronauta->fotos)
         <div class="cmv2-hero-photo" style="background-image: url('{{ Storage::url($astronauta->fotos) }}');"></div>
@@ -100,10 +91,8 @@
 
   </section>
 
-  {{-- ═══════════════ BODY ═══════════════ --}}
   <div class="cmv2-body">
 
-    {{-- INFORMAÇÕES PESSOAIS --}}
     <div class="cmv2-review-wrap">
       <div class="cmv2-bg-num">01</div>
       <div class="cmv2-inner">
@@ -121,7 +110,6 @@
       </div>
     </div>
 
-    {{-- META STRIP --}}
     <div class="cmv2-inner">
       <div class="cmv2-strip">
         <div class="cmv2-strip-item">
@@ -143,7 +131,6 @@
       </div>
     </div>
 
-    {{-- MISSÕES VINCULADAS --}}
     @if($astronauta->missoes->isNotEmpty())
     <div class="cmv2-tl-section">
       <div class="cmv2-inner">
@@ -180,7 +167,6 @@
     </div>
     @endif
 
-    {{-- DANGER --}}
     @if (Auth::user()->isAdmin())
     <div class="cmv2-inner">
       <div class="cmv2-danger-wrap">
@@ -196,7 +182,7 @@
     </div>
     @endif
 
-  </div>{{-- /cmv2-body --}}
-</div>{{-- /cmv2-page --}}
+  </div>
+</div>
 
 @endsection

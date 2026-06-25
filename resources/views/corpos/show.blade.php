@@ -6,7 +6,6 @@
 
 <div class="cmv2-page">
 
-  {{-- ═══════════════ HERO ═══════════════ --}}
   <section class="cmv2-hero">
 
     <nav class="cmv2-nav">
@@ -34,7 +33,6 @@
 
       <p class="cmv2-subtitle">{{ ucfirst($corpo->tipo) }} &nbsp;·&nbsp; {{ $corpo->distancia_terra }} da Terra</p>
 
-      {{-- Métrica destaque: diâmetro --}}
       <div class="cmv2-metric-row">
         <div>
           <span class="cmv2-metric-num" style="font-size:48px;">{{ number_format($corpo->diametro_km, 0, ',', '.') }}</span>
@@ -89,10 +87,8 @@
 
   </section>
 
-  {{-- ═══════════════ BODY ═══════════════ --}}
   <div class="cmv2-body">
 
-    {{-- DESCRIÇÃO --}}
     @if($corpo->descricao)
     <div class="cmv2-review-wrap">
       <div class="cmv2-bg-num">01</div>
@@ -108,7 +104,6 @@
     </div>
     @endif
 
-    {{-- META STRIP --}}
     <div class="cmv2-inner">
       <div class="cmv2-strip">
         <div class="cmv2-strip-item">
@@ -130,7 +125,6 @@
       </div>
     </div>
 
-    {{-- MISSÕES --}}
     @if($corpo->missoes->isNotEmpty())
     <div class="cmv2-tl-section">
       <div class="cmv2-inner">
@@ -165,7 +159,6 @@
     </div>
     @endif
 
-    {{-- DANGER --}}
     @if (Auth::user()->isAdmin())
     <div class="cmv2-inner">
       <div class="cmv2-danger-wrap">

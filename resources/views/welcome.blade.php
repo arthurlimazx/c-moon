@@ -6,11 +6,9 @@
 
 <div class="home-page">
 
-{{-- ══ HERO ══ --}}
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
- 
 
   <div class="hero-inner wrap" style="max-width:100%; padding:0;">
     <div class="hero-left">
@@ -40,7 +38,7 @@
     </div>
 
     <div class="hero-right">
-      
+
       <div class="hero-float-text">
         Dados precisos para<br>decisões mais rápidas<br>e exploração mais segura.
       </div>
@@ -49,7 +47,6 @@
 
 </section>
 
-{{-- ══ ABOUT ══ --}}
 <section class="about" id="sobre">
   <div class="wrap" style="max-width:100%; padding:0;">
     <div class="about-inner">
@@ -91,7 +88,6 @@
   </div>
 </section>
 
-{{-- ══ SERVIÇOS ══ --}}
 <section class="services" id="servicos">
   <div class="wrap" style="max-width:100%; padding:0;">
     <div class="services-header">
@@ -109,15 +105,13 @@
   </div>
 </section>
 
-{{-- ══ DESTAQUES ALTERNADOS ══ --}}
 <section class="highlight">
 
-  {{-- linha 1: visual | texto --}}
   <div class="highlight-row">
     <div class="highlight-visual">
       <div class="highlight-planet-scene">
         <div class="hl-planet">
-         
+
         </div>
       </div>
       <div class="hl-label">Gestão de Astronautas</div>
@@ -137,12 +131,11 @@
     </div>
   </div>
 
-  {{-- linha 2: texto | visual --}}
   <div class="highlight-row reverse">
     <div class="highlight-visual">
       <div class="highlight-planet-scene">
         <div class="hl-planet">
-         
+
         </div>
       </div>
       <div class="hl-label">Cartografia Espacial</div>
@@ -164,10 +157,6 @@
 
 </section>
 
-
-
-
-{{-- ══ FOOTER ══ --}}
 <footer class="footer">
   <div class="wrap">
     <div class="footer-hero reveal">
@@ -201,6 +190,6 @@
   </div>
 </footer>
 
-</div>{{-- /home-page --}}
+</div>
 
 @endsection

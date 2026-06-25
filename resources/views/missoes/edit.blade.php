@@ -76,7 +76,6 @@
             @error('descricao') <span class="form-error">✕ {{ $message }}</span> @enderror
           </div>
 
-          {{-- FOTO UPLOAD --}}
           <div class="form-group form-group-full">
             <label class="form-label">Imagem da missão <span style="color:var(--text-dim); font-weight:400;">(opcional)</span></label>
             <div class="photo-upload-wrap photo-upload-wide" id="photoWrap">

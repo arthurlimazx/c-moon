@@ -17,7 +17,6 @@
   </div>
 </div>
 
-{{-- ── STATS GERAIS ── --}}
 <div class="stats-strip" style="grid-template-columns: repeat(4, 1fr);">
   <div class="stat-card">
     <span class="stat-label">Astronautas registrados</span>
@@ -41,7 +40,6 @@
   </div>
 </div>
 
-{{-- ── STATUS DAS MISSÕES E ASTRONAUTAS ── --}}
 <div class="dash-section-label">Status operacional</div>
 
 <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 16px;">
@@ -98,7 +96,6 @@
 
 </div>
 
-{{-- ── MISSÕES RECENTES ── --}}
 <div class="dash-section-label">Missões recentes</div>
 
 @if($missoesRecentes->isEmpty())
@@ -148,7 +145,6 @@
   </div>
 @endif
 
-{{-- ── ASTRONAUTAS E USUÁRIOS RECENTES ── --}}
 <div class="dash-section-label">Atividade recente</div>
 
 <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px;">
